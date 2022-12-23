@@ -1,0 +1,61 @@
+body {
+  margin: 0;
+}
+
+.content {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: red;
+}
+
+.hamburger {
+  /* background: none; */
+  background-image: url(../icons/light-mode/menu.svg);
+  background-position: center;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  border: none;
+}
+
+.home {
+  /* background: none; */
+  background-image: url(../icons/light-mode/home.svg);
+  background-position: center;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  border: none;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  background-color: yellow;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tasks {
+  flex: 1;
+  background-color: orange;
+}
+
+.footer {
+  background-color: blue;
+}
