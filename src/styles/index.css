@@ -1,5 +1,10 @@
+:root {
+  --trans: 0.2s ease-in;
+}
+
 body {
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .content {
@@ -11,12 +16,23 @@ body {
 .header {
   display: flex;
   justify-content: space-between;
-  background-color: red;
+  background-color: #3f3f3f;
+  padding: 10px 20px;
+}
+
+.header-left {
+  display: flex;
+  gap: 10px;
+}
+
+.header-right {
+  display: flex;
+  gap: 10px;
 }
 
 .hamburger {
-  /* background: none; */
-  background-image: url(../icons/light-mode/menu.svg);
+  background: none;
+  background-image: url(../icons/dark-mode/menu.svg);
   background-position: center;
   cursor: pointer;
   height: 24px;
@@ -25,8 +41,18 @@ body {
 }
 
 .home {
-  /* background: none; */
-  background-image: url(../icons/light-mode/home.svg);
+  background: none;
+  background-image: url(../icons/dark-mode/home.svg);
+  background-position: center;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  border: none;
+}
+
+.add {
+  background: none;
+  background-image: url(../icons/dark-mode/add.svg);
   background-position: center;
   cursor: pointer;
   height: 24px;
@@ -43,7 +69,15 @@ body {
   display: flex;
   flex-direction: column;
   width: 200px;
+  height: 100%;
   background-color: yellow;
+  padding: 0px 15px;
+  transition: var(--trans);
+  position: fixed;
+}
+
+.invisible {
+  transform: translateX(-230px);
 }
 
 ul {
@@ -51,11 +85,40 @@ ul {
   padding: 0;
 }
 
+.sidebar-item {
+  padding: 5px 0px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 18px;
+}
+
 .tasks {
   flex: 1;
   background-color: orange;
+  padding: 30px;
+  transition: var(--trans);
 }
 
-.footer {
-  background-color: blue;
+.stretch {
+  margin-left: 230px;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 24px;
+}
+
+.header-date {
+  font-weight: normal;
+  font-size: 16px;
+}
+
+button.agenda-add-task {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
 }
