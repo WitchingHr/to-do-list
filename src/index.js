@@ -1,12 +1,6 @@
 import css from './styles/index.css';
+import today from './today';
+import upcoming from './upcoming';
+import sidebar from './sidebar';
 
-const hamburger = document.querySelector('.hamburger');
-hamburger.addEventListener('click', toggleSidebar);
-
-const sidebar = document.querySelector('.sidebar');
-const tasks = document.querySelector('.tasks');
-
-function toggleSidebar() {
-  sidebar.classList.toggle('invisible');
-  tasks.classList.toggle('stretch');
-}
+today();
