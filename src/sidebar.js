@@ -8,3 +8,10 @@ export default function toggleSidebar() {
   sidebar.classList.toggle('invisible');
   tasks.classList.toggle('stretch');
 }
+
+const projectsToggle = document.querySelector('.projects-toggle');
+projectsToggle.addEventListener('click', toggleButton);
+
+function toggleButton() {
+  projectsToggle.classList.toggle('toggle');
+}

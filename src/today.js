@@ -4,6 +4,7 @@ todaySidebar.addEventListener('click', populateToday);
 export default function populateToday() {
   populateHeading();
   populateDate();
+  updateTitle();
 }
 
 function populateHeading() {
@@ -22,6 +23,10 @@ function populateDate() {
   ];
   const month = new Date().getMonth();
   d.innerHTML = `${days[day]} ${months[month]} ${date}`;
+}
+
+function updateTitle() {
+  document.title = 'To Do: Today';
 }
 
 // const content = document.querySelector('.agenda-content');

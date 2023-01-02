@@ -101,8 +101,7 @@ ul {
 }
 
 .project-buttons {
-  display: flex;
-  gap: 10px;
+  display: none;
 }
 
 .add-project {
@@ -123,6 +122,15 @@ ul {
   height: 16px;
   width: 16px;
   border: none;
+}
+
+.toggle {
+  transform: rotate(90deg);
+}
+
+.sidebar:hover .project-buttons {
+  display: flex;
+  gap: 10px;
 }
 
 .tasks {

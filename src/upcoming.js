@@ -3,6 +3,7 @@ upcomingSidebar.addEventListener('click', populateUpcoming);
 
 export default function populateUpcoming() {
   populateHeading();
+  updateTitle();
 }
 
 function populateHeading() {
@@ -11,4 +12,8 @@ function populateHeading() {
 
   const d = document.querySelector('.header-date');
   d.innerHTML = '';
+}
+
+function updateTitle() {
+  document.title = 'To Do: Upcoming';
 }
