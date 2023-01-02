@@ -13,6 +13,7 @@ function createEditor() {
   list.appendChild(editorListItem);
 
   const form = document.createElement('form');
+  form.classList.add('editor');
   editorListItem.appendChild(form);
 
   const editor = document.createElement('div');
