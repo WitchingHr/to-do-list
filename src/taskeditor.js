@@ -1,15 +1,15 @@
-const taskButton = document.querySelector('.agenda-add-task');
-taskButton.addEventListener('click', openTaskAdder);
+addAddTaskListener();
 
 const list = document.querySelector('.agenda-list');
 
 export default function openTaskAdder() {
   hideButton();
-  createEditor();
+  showForm();
 }
 
-function createEditor() {
+function showForm() {
   const editorListItem = document.createElement('li');
+  editorListItem.classList.add('li-form');
   list.appendChild(editorListItem);
 
   const form = document.createElement('form');
@@ -35,10 +35,19 @@ function createEditor() {
   dateProjectBar.classList.add('info-bar');
   editor.appendChild(dateProjectBar);
 
-  const dateBtn = document.createElement('button');
-  dateBtn.classList.add('info-buttons');
-  dateBtn.innerHTML = 'Today';
-  dateProjectBar.appendChild(dateBtn);
+  const calLabel = document.createElement('label');
+  calLabel.setAttribute('for', 'calendar');
+  calLabel.innerHTML = 'Due: '
+  dateProjectBar.appendChild(calLabel);
+
+  const calendar = document.createElement('input');
+  calendar.setAttribute('type', 'date');
+  calendar.setAttribute('name', 'calendar');
+  const today = new Date().toISOString().split('T')[0];
+  calendar.setAttribute('min', today);
+  calendar.classList.add('info-buttons');
+  calendar.innerHTML = 'Today';
+  dateProjectBar.appendChild(calendar);
 
   const projectBtn = document.createElement('button');
   projectBtn.classList.add('info-buttons');
@@ -54,6 +63,7 @@ function createEditor() {
   cancel.classList.add('cancel');
   cancel.innerHTML = 'Cancel';
   saveBar.appendChild(cancel);
+  addCancelListener();
 
   const addTask = document.createElement('button');
   addTask.classList.add('save-bar-buttons');
@@ -62,12 +72,13 @@ function createEditor() {
   saveBar.appendChild(addTask);
 }
 
-function hideButton() {
-  const button = document.querySelector('.button-node');
-  button.remove();
+function hideForm() {
+  const form = document.querySelector('.li-form');
+  form.remove();
+  showButton();
 }
 
-function createButton() {
+function showButton() {
   const li = document.createElement('li');
   li.classList.add('button-node');
   list.appendChild(li);
@@ -76,4 +87,22 @@ function createButton() {
   button.classList.add('agenda-add-task');
   button.innerHTML = 'Add Task';
   li.appendChild(button);
+
+  addAddTaskListener();
+}
+
+function hideButton() {
+  const button = document.querySelector('.button-node');
+  button.remove();
+}
+
+
+function addAddTaskListener() {
+  const taskButton = document.querySelector('.agenda-add-task');
+  taskButton.addEventListener('click', openTaskAdder);
+}
+
+function addCancelListener() {
+  const cancelBtn = document.querySelector('.cancel');
+  cancelBtn.addEventListener('click', hideForm);
 }
