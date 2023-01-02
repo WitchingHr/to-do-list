@@ -122,3 +122,8 @@ button.agenda-add-task {
   cursor: pointer;
   text-align: left;
 }
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+}

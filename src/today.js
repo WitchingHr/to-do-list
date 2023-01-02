@@ -23,3 +23,24 @@ function populateDate() {
   const month = new Date().getMonth();
   d.innerHTML = `${days[day]} ${months[month]} ${date}`;
 }
+
+// const content = document.querySelector('.agenda-content');
+// const contentTop = document.createElement('div');
+// content.appendChild(contentTop);
+// const contentBottom = document.createElement('div');
+// content.appendChild(contentBottom);
+// // Overdue
+// const overdue = document.createElement('h2');
+// overdue.innerHTML = 'Overdue';
+// overdue.classList.add('h2');
+// contentTop.appendChild(overdue);
+
+// const line = document.createElement('hr');
+// line.classList.add('line');
+// contentTop.appendChild(line);
+
+// // Today
+// const today = document.createElement('h2');
+// today.innerHTML = 'Today';
+// today.classList.add('h2');
+// contentBottom.appendChild(today);
