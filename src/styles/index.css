@@ -94,6 +94,37 @@ ul {
   cursor: pointer;
 }
 
+.projects {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.add-project {
+  background: none;
+  background-image: url(../icons/dark-mode/add.svg);
+  background-position: center;
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+  border: none;
+}
+
+.projects-toggle {
+  background: none;
+  background-image: url(../icons/dark-mode/arrow.svg);
+  background-position: center;
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+  border: none;
+}
+
 .tasks {
   flex: 1;
   background-color: #4f5051;
