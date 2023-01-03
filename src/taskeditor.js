@@ -25,10 +25,14 @@ function showForm() {
 
   const taskNameInput = document.createElement('input');
   taskNameInput.setAttribute('placeholder', 'Task Name');
+  taskNameInput.setAttribute('type', 'text');
+  taskNameInput.classList.add('editor-input-top');
   inputs.appendChild(taskNameInput);
   
   const taskDescriptInput = document.createElement('input');
   taskDescriptInput.setAttribute('placeholder', 'Task Description');
+  taskDescriptInput.setAttribute('type', 'text');
+  taskDescriptInput.classList.add('editor-input-bottom');
   inputs.appendChild(taskDescriptInput);
 
   const dateProjectBar = document.createElement('div');

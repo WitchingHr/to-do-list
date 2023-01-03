@@ -1,4 +1,5 @@
 :root {
+  box-sizing: border-box;
   --trans: 0.15s ease-in;
   --font-color-dark: white;
 }
@@ -145,6 +146,33 @@ ul {
   gap: 10px;
 }
 
+.project-form {
+  display: flex;
+}
+
+input[type='text'] {
+  border: 1px solid white;
+  padding: 7px 5px;
+}
+
+.project-input {
+  flex: 1;
+  border-radius: 5px 0 0 5px;
+}
+
+.close-button {
+  border: none;
+  border-radius: 0 5px 5px 0;
+  font-size: 18px;
+  background-color: white;
+  color: rgb(192, 192, 192);
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: rgb(121, 121, 121);
+}
+
 .tasks {
   flex: 1;
   background-color: #4f5051;
@@ -179,6 +207,11 @@ button.agenda-add-task {
   border: none;
   cursor: pointer;
   text-align: left;
+  color: var(--font-color-dark);
+}
+
+button.agenda-add-task:hover {
+  text-decoration: underline;
 }
 
 form.editor {
@@ -190,6 +223,14 @@ form.editor {
 .inputs {
   display: flex;
   flex-direction: column;
+}
+
+.editor-input-top {
+  border-radius: 5px 5px 0 0;
+}
+
+.editor-input-bottom {
+  border-radius: 0 0 5px 5px;
 }
 
 .save-bar {
