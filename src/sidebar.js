@@ -15,3 +15,17 @@ projectsToggle.addEventListener('click', toggleButton);
 function toggleButton() {
   projectsToggle.classList.toggle('toggle');
 }
+
+const addProjectBtn = document.querySelector('.add-project');
+addProjectBtn.addEventListener('click', addProject);
+
+function addProject() {
+  const container = document.querySelector('.project-container');
+  const form = document.createElement('form');
+  form.classList.add('project-form');
+  container.appendChild(form);
+  
+  const input = document.createElement('input');
+  input.setAttribute('placeholder', 'New Project');
+  form.appendChild(input);
+}

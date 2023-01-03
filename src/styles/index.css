@@ -1,5 +1,5 @@
 :root {
-  --trans: 0.1s ease-in;
+  --trans: 0.15s ease-in;
   --font-color-dark: white;
 }
 
@@ -90,18 +90,29 @@ ul {
 }
 
 .sidebar-item {
-  padding: 5px 0px;
+  padding: 7px 5px;
   cursor: pointer;
+  border-radius: 5px;
+}
+
+.sidebar-item:hover {
+  background-color: #7b57b8;
 }
 
 .projects {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 5px;
+}
+
+.projects:hover {
+  background-color: #7b57b8;
 }
 
 .project-buttons {
   display: none;
+  padding: 0px 5px;
 }
 
 .add-project {
@@ -122,6 +133,7 @@ ul {
   height: 16px;
   width: 16px;
   border: none;
+  transition: 0.2s;
 }
 
 .toggle {
