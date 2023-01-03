@@ -80,6 +80,7 @@ function closeInput(e) {
 }
 
 function closeInputByToggle() {
+  if (open === 0) return;
   open = 0;
   const li = document.querySelector('.project-list-item-input');
   li.remove();
