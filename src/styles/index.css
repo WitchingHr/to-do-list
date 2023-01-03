@@ -116,6 +116,15 @@ ul {
   padding: 0px 5px;
 }
 
+.add-project-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+}
+
 .add-project {
   background: none;
   background-image: url(../icons/dark-mode/add.svg);
@@ -124,6 +133,15 @@ ul {
   height: 16px;
   width: 16px;
   border: none;
+}
+
+.projects-toggle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
 }
 
 .projects-toggle {
@@ -171,6 +189,11 @@ input[type='text'] {
 
 .close-button:hover {
   color: rgb(121, 121, 121);
+}
+
+.project-wrapper {
+  display: flex;
+  gap: 10px;
 }
 
 .tasks {
