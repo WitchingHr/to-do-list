@@ -1,3 +1,5 @@
+import { projects } from './sidebar';
+
 addAddTaskListener();
 
 const list = document.querySelector('.agenda-list');
@@ -66,6 +68,7 @@ function showForm() {
   projectBtn.classList.add('project-info');
   projectBtn.innerHTML = 'Project';
   dateProjectBar.appendChild(projectBtn);
+  addProjectListener();
 
   const saveBar = document.createElement('div');
   saveBar.classList.add('save-bar');
@@ -107,6 +110,44 @@ function showButton() {
 function hideButton() {
   const button = document.querySelector('.button-node');
   button.remove();
+}
+
+function getProjectXY() {
+  const projectBtn = document.querySelector('.project-info');
+  const rect = projectBtn.getBoundingClientRect();
+  console.log(rect)
+  const x = rect.left;
+  const y = rect.bottom;
+  console.log(x);
+  console.log(y);
+  return [x, y];
+}
+
+function openProjectModal(e) {
+  e.preventDefault();
+  const position = getProjectXY();
+  const container = document.querySelector('.modal-container');
+  const modal = document.createElement('div');
+  modal.classList.add('project-modal');
+  modal.style.top = `${position[1]}px`;
+  modal.style.left = `${position[0]}px`;
+  console.log(position);
+  container.appendChild(modal);
+  const list = document.createElement('ul');
+  list.classList.add('modal-list');
+  modal.appendChild(list);
+
+  projects.forEach(project => {
+    const li = document.createElement('li');
+    li.classList.add('modal-li');
+    li.innerHTML = project.project;
+    list.appendChild(li);
+  });
+}
+
+function addProjectListener() {
+  const projectBtn = document.querySelector('.project-info');
+  projectBtn.addEventListener('click', openProjectModal);
 }
 
 function focusDate() {

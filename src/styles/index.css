@@ -13,6 +13,36 @@ body {
   color: var(--font-color-dark);
 }
 
+.modal-container {
+  position: relative;
+}
+
+.project-modal {
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 5px;
+  box-shadow: 0px 2px 3px 0px #80808063;
+  padding: 15px 0;
+  color: gray;
+  width: 200px;
+}
+
+.modal-list {
+  margin: 0;
+}
+
+.modal-li {
+  padding: 0 15px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.modal-li:hover {
+  background-color: lightgray;
+}
+
 .content {
   height: 100vh;
   display: flex;
@@ -272,6 +302,7 @@ form.editor {
   border-radius: 5px;
   margin-left: 6px;
   padding: 4px;
+  cursor: pointer;
 }
 
 .calendar-wrapper:hover {
@@ -286,11 +317,13 @@ form.editor {
   color: gray;
   font-size: 13px;
   margin-left: 5px;
+  cursor: pointer;
 }
 
 input[type='date'] {
   border: none;
   color: gray;
+  cursor: pointer;
 }
 
 .project-info {
@@ -299,6 +332,7 @@ input[type='date'] {
   border-radius: 5px;
   border: 1px solid gray;
   padding: 0 8px;
+  cursor: pointer;
 }
 
 .project-info:hover {
@@ -316,6 +350,7 @@ input[type='date'] {
   padding: 5px 8px;
   border-radius: 5px;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .cancel {

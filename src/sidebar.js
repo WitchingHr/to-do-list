@@ -86,7 +86,7 @@ function closeInputByToggle() {
   li.remove();
 }
 
-const projects = []
+export const projects = []
 
 function addProject(e) {
   const input = document.querySelector('.project-input');
