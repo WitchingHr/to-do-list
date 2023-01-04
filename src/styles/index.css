@@ -24,9 +24,9 @@ body {
   border: 1px solid gray;
   border-radius: 5px;
   box-shadow: 0px 2px 3px 0px #80808063;
-  padding: 15px 0;
   color: gray;
   width: 200px;
+  overflow: hidden;
 }
 
 .modal-list {
@@ -34,13 +34,15 @@ body {
 }
 
 .modal-li {
-  padding: 0 15px;
+  padding: 0 8px;
   height: 32px;
+  line-height: 32px;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .modal-li:hover {
-  background-color: lightgray;
+  background-color: var(--button-hover);
 }
 
 .content {
