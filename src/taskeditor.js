@@ -17,6 +17,7 @@ function showForm() {
   editorListItem.appendChild(form);
 
   const editor = document.createElement('div');
+  editor.classList.add('editor-wrapper');
   form.appendChild(editor);
 
   const inputs = document.createElement('div');
@@ -39,10 +40,15 @@ function showForm() {
   dateProjectBar.classList.add('info-bar');
   editor.appendChild(dateProjectBar);
 
+  const calendarWrapper = document.createElement('span');
+  calendarWrapper.classList.add('calendar-wrapper');
+  dateProjectBar.appendChild(calendarWrapper);
+
   const calLabel = document.createElement('label');
+  calLabel.classList.add('calendar-label');
   calLabel.setAttribute('for', 'calendar');
   calLabel.innerHTML = 'Due: '
-  dateProjectBar.appendChild(calLabel);
+  calendarWrapper.appendChild(calLabel);
 
   const calendar = document.createElement('input');
   calendar.setAttribute('type', 'date');
@@ -51,10 +57,13 @@ function showForm() {
   calendar.setAttribute('min', today);
   calendar.classList.add('info-buttons');
   calendar.innerHTML = 'Today';
-  dateProjectBar.appendChild(calendar);
+  calendarWrapper.appendChild(calendar);
+
+  addLabelListener();
 
   const projectBtn = document.createElement('button');
   projectBtn.classList.add('info-buttons');
+  projectBtn.classList.add('project-info');
   projectBtn.innerHTML = 'Project';
   dateProjectBar.appendChild(projectBtn);
 
@@ -71,7 +80,7 @@ function showForm() {
 
   const addTask = document.createElement('button');
   addTask.classList.add('save-bar-buttons');
-  addTask.classList.add('addTask');
+  addTask.classList.add('add-task');
   addTask.innerHTML = 'Add Task';
   saveBar.appendChild(addTask);
 }
@@ -100,6 +109,14 @@ function hideButton() {
   button.remove();
 }
 
+function focusDate() {
+  const date = document.querySelector('[type="date"]');
+  date.focus();
+}
+function addLabelListener() {
+  const label = document.querySelector('.calendar-label');
+  label.addEventListener('click', focusDate);
+}
 
 function addAddTaskListener() {
   const taskButton = document.querySelector('.agenda-add-task');
