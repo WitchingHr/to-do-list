@@ -57,6 +57,7 @@ function openInput() {
     const input = document.createElement('input');
     input.setAttribute('placeholder', 'New Project');
     input.setAttribute('type', 'text');
+    input.setAttribute('maxlength', '50');
     input.classList.add('project-input');
     form.appendChild(input);
 
@@ -130,6 +131,7 @@ function populateProjects() {
     icon.innerHTML = '&#128211;'
     projectWrapper.appendChild(icon);
     const projectName = document.createElement('span');
+    projectName.classList.add('project-span');
     projectName.innerHTML = project.project;
     projectWrapper.appendChild(projectName);
   })

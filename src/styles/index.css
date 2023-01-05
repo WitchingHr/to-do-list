@@ -233,6 +233,13 @@ input[type='text'] {
   gap: 10px;
 }
 
+.project-span {
+  text-overflow: ellipsis;
+  width: 164px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .tasks {
   flex: 1;
   background-color: #4f5051;
