@@ -378,6 +378,20 @@ input[type='date'] {
 
 .add-task {
   color: white;
+}
+
+form:invalid .add-task {
+  cursor: not-allowed;
   background-color: gray;
   border: 1px solid gray;
+}
+
+form:valid .add-task {
+  background-color: rgb(30, 30, 30);
+  border: 1px solid rgb(30, 30, 30);
+}
+
+form:valid .add-task:hover {
+  background-color: black;
+  border: 1px solid black;
 }
