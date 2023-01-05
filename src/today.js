@@ -1,3 +1,4 @@
+import openTask from './taskeditor'
 import { hideForm } from "./taskeditor";
 
 const todaySidebar = document.querySelector('.today');
@@ -37,6 +38,14 @@ function populateDate() {
 
 function updateTitle() {
   document.title = 'To Do: Today';
+}
+
+const add = document.querySelector('.add');
+add.addEventListener('click', goToTaskAdder);
+
+function goToTaskAdder() {
+  populateToday();
+  openTask();
 }
 
 // const content = document.querySelector('.agenda-content');
