@@ -105,6 +105,9 @@ function Project(input) {
   }
 }
 
+projects.push(Project('To Do'));
+populateProjects();
+
 function addWindowListener() {
   window.addEventListener('keydown', addProject);
 }

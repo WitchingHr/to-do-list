@@ -333,6 +333,7 @@ input[type='date'] {
 }
 
 .project-info {
+  min-width: 55px;
   color: gray;
   background-color: white;
   border-radius: 5px;

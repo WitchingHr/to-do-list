@@ -66,7 +66,7 @@ function createForm() {
   const projectBtn = document.createElement('button');
   projectBtn.classList.add('info-buttons');
   projectBtn.classList.add('project-info');
-  projectBtn.innerHTML = 'Project';
+  projectBtn.innerHTML = 'To Do';
   dateProjectBar.appendChild(projectBtn);
   addProjectListener();
   
@@ -88,7 +88,7 @@ function createForm() {
   saveBar.appendChild(addTask);
 }
 
-function hideForm() {
+export function hideForm() {
   const form = document.querySelector('.li-form');
   form.remove();
   showButton();

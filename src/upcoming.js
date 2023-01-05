@@ -1,9 +1,12 @@
+import { checkForForm } from "./today";
+
 const upcomingSidebar = document.querySelector('.upcoming');
 upcomingSidebar.addEventListener('click', populateUpcoming);
 
 export default function populateUpcoming() {
   populateHeading();
   updateTitle();
+  checkForForm();
 }
 
 function populateHeading() {

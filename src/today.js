@@ -1,3 +1,5 @@
+import { hideForm } from "./taskeditor";
+
 const todaySidebar = document.querySelector('.today');
 todaySidebar.addEventListener('click', populateToday);
 
@@ -5,6 +7,14 @@ export default function populateToday() {
   populateHeading();
   populateDate();
   updateTitle();
+  checkForForm();
+}
+
+export function checkForForm() {
+  const form = document.querySelector('.li-form');
+  if (form) {
+    hideForm();
+  }
 }
 
 function populateHeading() {
