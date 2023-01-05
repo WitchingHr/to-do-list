@@ -29,6 +29,7 @@ function createForm() {
   const taskNameInput = document.createElement('input');
   taskNameInput.setAttribute('placeholder', 'Task Name');
   taskNameInput.setAttribute('type', 'text');
+  taskNameInput.required = true;
   taskNameInput.classList.add('editor-input-top');
   inputs.appendChild(taskNameInput);
 
@@ -88,6 +89,8 @@ function createForm() {
   addTask.innerHTML = 'Add Task';
   saveBar.appendChild(addTask);
   addTask.addEventListener('click', submitTask);
+
+  taskNameInput.focus();
 }
 
 export function hideForm() {
@@ -171,7 +174,6 @@ function focusDate() {
 
 function submitTask(e) {
   e.preventDefault();
-  // debugger;
   const nameInput = document.querySelector('.editor-input-top');
   const descInput = document.querySelector('.editor-input-bottom');
   const cal = document.querySelector('.calendar');
@@ -181,8 +183,13 @@ function submitTask(e) {
   const date = cal.value;
   const project = proj.innerHTML;
   const index = projects.findIndex(obj => obj.project === project);
-  projects[index].tasks.push(Task(name, description, date));
-  console.log(projects); // <--- DELETE ME ---------------------------------------------
+  const form = document.querySelector('.editor');
+  let validity = form.reportValidity();
+  if (validity) {
+    projects[index].tasks.push(Task(name, description, date));
+    console.log(projects); // <--- DELETE ME ---------------------------------------------
+    hideForm();
+  }
 }
 
 function Task(name, description, date) {
