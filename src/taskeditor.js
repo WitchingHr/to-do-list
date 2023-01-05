@@ -13,60 +13,74 @@ function createForm() {
   const editorListItem = document.createElement('li');
   editorListItem.classList.add('li-form');
   list.appendChild(editorListItem);
+
   const form = document.createElement('form');
   form.classList.add('editor');
   editorListItem.appendChild(form);
+
   const editor = document.createElement('div');
   editor.classList.add('editor-wrapper');
   form.appendChild(editor);
+
   const inputs = document.createElement('div');
   inputs.classList.add('inputs');
   editor.appendChild(inputs);
+
   const taskNameInput = document.createElement('input');
   taskNameInput.setAttribute('placeholder', 'Task Name');
   taskNameInput.setAttribute('type', 'text');
   taskNameInput.classList.add('editor-input-top');
   inputs.appendChild(taskNameInput);
+
   const taskDescriptInput = document.createElement('input');
   taskDescriptInput.setAttribute('placeholder', 'Task Description');
   taskDescriptInput.setAttribute('type', 'text');
   taskDescriptInput.classList.add('editor-input-bottom');
   inputs.appendChild(taskDescriptInput);
+
   const dateProjectBar = document.createElement('div');
   dateProjectBar.classList.add('info-bar');
   editor.appendChild(dateProjectBar);
+
   const calendarWrapper = document.createElement('span');
   calendarWrapper.classList.add('calendar-wrapper');
   dateProjectBar.appendChild(calendarWrapper);
+
   const calLabel = document.createElement('label');
   calLabel.classList.add('calendar-label');
   calLabel.setAttribute('for', 'calendar');
   calLabel.innerHTML = 'Due: '
   calendarWrapper.appendChild(calLabel);
+
   const calendar = document.createElement('input');
   calendar.setAttribute('type', 'date');
   calendar.setAttribute('name', 'calendar');
+
   const today = new Date().toISOString().split('T')[0];
   calendar.setAttribute('min', today);
   calendar.classList.add('info-buttons');
   calendar.innerHTML = 'Today';
   calendarWrapper.appendChild(calendar);
   addLabelListener();
+
   const projectBtn = document.createElement('button');
   projectBtn.classList.add('info-buttons');
   projectBtn.classList.add('project-info');
   projectBtn.innerHTML = 'Project';
   dateProjectBar.appendChild(projectBtn);
   addProjectListener();
+  
   const saveBar = document.createElement('div');
   saveBar.classList.add('save-bar');
   form.appendChild(saveBar);
+
   const cancel = document.createElement('button');
   cancel.classList.add('save-bar-buttons');
   cancel.classList.add('cancel');
   cancel.innerHTML = 'Cancel';
   saveBar.appendChild(cancel);
   addCancelListener();
+
   const addTask = document.createElement('button');
   addTask.classList.add('save-bar-buttons');
   addTask.classList.add('add-task');
@@ -108,6 +122,7 @@ function openProjectModal(e) {
   e.preventDefault();
   const position = getCoordinates();
   const container = document.querySelector('.modal-container');
+  container.style.display = 'block';
   const modal = document.createElement('div');
   modal.classList.add('project-modal');
   modal.style.top = `${position[1]}px`;
@@ -121,7 +136,30 @@ function openProjectModal(e) {
     li.classList.add('modal-li');
     li.innerHTML = project.project;
     list.appendChild(li);
+    li.addEventListener('click', updateProjectBtn);
   });
+  container.addEventListener('click', closeModalByClick);
+}
+
+function closeModal() {
+  const modal = document.querySelector('.project-modal');
+  const container = document.querySelector('.modal-container');
+  modal.remove();
+  container.style.display = 'none';
+  container.removeEventListener('click', closeModalByClick);
+}
+
+function closeModalByClick(e) {
+  const container = document.querySelector('.modal-container');
+  if (e.target === container) {
+    closeModal();
+  }
+}
+
+function updateProjectBtn(e) {
+  const projectBtn = document.querySelector('.project-info');
+  projectBtn.innerHTML = e.target.innerHTML;
+  closeModal();
 }
 
 function focusDate() {
