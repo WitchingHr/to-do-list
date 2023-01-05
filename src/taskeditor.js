@@ -53,6 +53,7 @@ function createForm() {
   calendarWrapper.appendChild(calLabel);
 
   const calendar = document.createElement('input');
+  calendar.classList.add('calendar');
   calendar.setAttribute('type', 'date');
   calendar.setAttribute('name', 'calendar');
 
@@ -86,6 +87,7 @@ function createForm() {
   addTask.classList.add('add-task');
   addTask.innerHTML = 'Add Task';
   saveBar.appendChild(addTask);
+  addTask.addEventListener('click', submitTask);
 }
 
 export function hideForm() {
@@ -165,6 +167,30 @@ function updateProjectBtn(e) {
 function focusDate() {
   const date = document.querySelector('[type="date"]');
   date.focus();
+}
+
+function submitTask(e) {
+  e.preventDefault();
+  // debugger;
+  const nameInput = document.querySelector('.editor-input-top');
+  const descInput = document.querySelector('.editor-input-bottom');
+  const cal = document.querySelector('.calendar');
+  const proj = document.querySelector('.project-info');
+  const name = nameInput.value;
+  const description = descInput.value;
+  const date = cal.value;
+  const project = proj.innerHTML;
+  const index = projects.findIndex(obj => obj.project === project);
+  projects[index].tasks.push(Task(name, description, date));
+  console.log(projects); // <--- DELETE ME ---------------------------------------------
+}
+
+function Task(name, description, date) {
+  return {
+    name,
+    description,
+    date
+  }
 }
 
 function addProjectListener() {
