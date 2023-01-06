@@ -13,6 +13,7 @@ body {
   color: var(--font-color-dark);
 }
 
+/* Project Modal */
 .modal-container {
   display: none;
   position: absolute;
@@ -49,12 +50,14 @@ body {
   background-color: var(--button-hover);
 }
 
+/* Document */
 .content {
   height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
+/* Header */
 .header {
   display: flex;
   justify-content: space-between;
@@ -111,6 +114,7 @@ body {
   flex: 1;
 }
 
+/* Sidebar */
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -245,6 +249,7 @@ input[type='text'] {
   overflow: hidden;
 }
 
+/* Tasks */
 .tasks {
   flex: 1;
   background-color: #4f5051;
@@ -263,6 +268,10 @@ input[type='text'] {
   align-self: center;
 }
 
+.agenda-header {
+  margin-bottom: 45px;
+}
+
 h1 {
   margin-top: 0;
   font-size: 24px;
@@ -275,6 +284,7 @@ h1 {
 }
 
 button.agenda-add-task {
+  padding: 0;
   width: 100%;
   background: none;
   border: none;
@@ -288,7 +298,9 @@ button.agenda-add-task:hover {
   text-decoration: underline;
 }
 
-form.editor {
+h2 {
+  font-size: 14px;
+  user-select: none;
 }
 
 .editor-wrapper {
@@ -404,4 +416,28 @@ form:valid .add-task {
 form:valid .add-task:hover {
   background-color: black;
   border: 1px solid black;
+}
+
+.task-container {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  height: 32px;
+}
+
+.line {
+  margin: 5px 0;
+  border-color: #fefefe26;
+}
+
+.task-name {
+  width: 120px;
+}
+
+.task-project {
+  margin-left: auto;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 3px 5px;
+  font-size: 14px;
 }

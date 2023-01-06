@@ -12,6 +12,10 @@ export default function toggleSidebar() {
 const projectsToggle = document.querySelector('.projects-toggle-container');
 projectsToggle.addEventListener('click', toggleButton);
 projectsToggle.addEventListener('click', toggleProjectView);
+const projectBar = document.querySelector('.project-click');
+projectBar.addEventListener('click', toggleButton);
+projectBar.addEventListener('click', toggleProjectView);
+
 
 function toggleButton() {
   const arrow = document.querySelector('.projects-toggle');

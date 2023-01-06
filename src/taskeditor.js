@@ -1,4 +1,5 @@
 import { projects } from './sidebar';
+import { populateTodaysTask } from './today';
 
 addAddTaskListener();
 
@@ -7,6 +8,12 @@ const list = document.querySelector('.agenda-list');
 export default function openTaskAdder() {
   hideButton();
   createForm();
+}
+
+export function getDateToday() {
+  const offset = (new Date()).getTimezoneOffset() * 60000;
+  const today = (new Date(Date.now() - offset)).toISOString().split('T')[0];
+  return today;
 }
 
 function createForm() {
@@ -58,8 +65,8 @@ function createForm() {
   calendar.setAttribute('type', 'date');
   calendar.setAttribute('name', 'calendar');
 
-  const today = new Date().toISOString().split('T')[0];
-  calendar.setAttribute('min', today);
+  calendar.setAttribute('min', getDateToday());
+  calendar.setAttribute('value', getDateToday());
   calendar.classList.add('info-buttons');
   calendar.innerHTML = 'Today';
   calendarWrapper.appendChild(calendar);
@@ -89,6 +96,7 @@ function createForm() {
   addTask.innerHTML = 'Add Task';
   saveBar.appendChild(addTask);
   addTask.addEventListener('click', submitTask);
+  addTask.addEventListener('click', populateTodaysTask);
 
   taskNameInput.focus();
 }
@@ -186,16 +194,17 @@ function submitTask(e) {
   const form = document.querySelector('.editor');
   let validity = form.reportValidity();
   if (validity) {
-    projects[index].tasks.push(Task(name, description, date));
+    projects[index].tasks.push(Task(name, description, project, date));
     console.log(projects); // <--- DELETE ME ---------------------------------------------
     hideForm();
   }
 }
 
-function Task(name, description, date) {
+function Task(name, description, project, date) {
   return {
     name,
     description,
+    project,
     date
   }
 }
@@ -219,3 +228,6 @@ function addCancelListener() {
   const cancelBtn = document.querySelector('.cancel');
   cancelBtn.addEventListener('click', hideForm);
 }
+
+// const today = new Date().toLocaleDateString().split('T')[0];
+// console.log(today);
