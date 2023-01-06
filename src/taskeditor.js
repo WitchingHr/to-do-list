@@ -1,5 +1,5 @@
 import { projects } from './sidebar';
-import { populateTodaysTask } from './today';
+import { populateTasks } from './today';
 
 addAddTaskListener();
 
@@ -65,7 +65,7 @@ function createForm() {
   calendar.setAttribute('type', 'date');
   calendar.setAttribute('name', 'calendar');
 
-  calendar.setAttribute('min', getDateToday());
+  // calendar.setAttribute('min', getDateToday());
   calendar.setAttribute('value', getDateToday());
   calendar.classList.add('info-buttons');
   calendar.innerHTML = 'Today';
@@ -96,7 +96,7 @@ function createForm() {
   addTask.innerHTML = 'Add Task';
   saveBar.appendChild(addTask);
   addTask.addEventListener('click', submitTask);
-  addTask.addEventListener('click', populateTodaysTask);
+  addTask.addEventListener('click', populateTasks);
 
   taskNameInput.focus();
 }
@@ -195,7 +195,6 @@ function submitTask(e) {
   let validity = form.reportValidity();
   if (validity) {
     projects[index].tasks.push(Task(name, description, project, date));
-    console.log(projects); // <--- DELETE ME ---------------------------------------------
     hideForm();
   }
 }
@@ -228,6 +227,3 @@ function addCancelListener() {
   const cancelBtn = document.querySelector('.cancel');
   cancelBtn.addEventListener('click', hideForm);
 }
-
-// const today = new Date().toLocaleDateString().split('T')[0];
-// console.log(today);
