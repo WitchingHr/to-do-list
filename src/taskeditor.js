@@ -190,21 +190,23 @@ function submitTask(e) {
   const description = descInput.value;
   const date = cal.value;
   const project = proj.innerHTML;
+  const complete = 0;
   const index = projects.findIndex(obj => obj.project === project);
   const form = document.querySelector('.editor');
   let validity = form.reportValidity();
   if (validity) {
-    projects[index].tasks.push(Task(name, description, project, date));
+    projects[index].tasks.push(Task(name, description, project, date, complete));
     hideForm();
   }
 }
 
-function Task(name, description, project, date) {
+function Task(name, description, project, date, complete) {
   return {
     name,
     description,
     project,
-    date
+    date,
+    complete
   }
 }
 

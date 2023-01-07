@@ -25,7 +25,7 @@ function toggleButton() {
 let view = 1;
 function toggleProjectView() {
   if (view === 1) {
-    clearProjects();
+    clearProjectsFromDOM();
     view = 0;
     closeInputByToggle();
     return;
@@ -36,7 +36,6 @@ function toggleProjectView() {
 
 const addProjectBtn = document.querySelector('.add-project-button-container');
 addProjectBtn.addEventListener('click', openInput);
-// addProjectBtn.addEventListener('click', toggleProjectView);
 
 let open = 0;
 const list = document.querySelector('.projects-list');
@@ -122,7 +121,7 @@ function removeWindowListener() {
 }
 
 function populateProjects() {
-  clearProjects();
+  clearProjectsFromDOM();
   projects.forEach(project => {
     const li = document.createElement('li');
     li.classList.add('sidebar-item');
@@ -141,7 +140,7 @@ function populateProjects() {
   })
 }
 
-function clearProjects() {
+function clearProjectsFromDOM() {
   const projectListItems = document.querySelectorAll('.project-li');
   projectListItems.forEach(item => {
     item.remove();

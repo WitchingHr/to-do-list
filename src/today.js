@@ -121,21 +121,31 @@ function populateTodaysTasks() {
       line.classList.add('task-line');
       agendaList.insertBefore(line, todayLine.nextSibling);
       const li = document.createElement('li');
-      li.classList.add('task-container'); // use task container to delete
+      li.classList.add('task-container');
       agendaList.insertBefore(li, todayLine.nextSibling);
       const checkBox = document.createElement('span');
       checkBox.classList.add('check-box');
       li.appendChild(checkBox);
-      const innerCheckBox = document.createElement('span');
-      innerCheckBox.classList.add('inner');
-      checkBox.appendChild(innerCheckBox);
+      checkBox.addEventListener('click', completeTask);
+      // const innerCheckBox = document.createElement('span');
+      // innerCheckBox.classList.add('inner');
+      // checkBox.appendChild(innerCheckBox);
       const name = document.createElement('span');
       name.classList.add('task-name');
-      name.innerHTML = task.name;
+      if (task.complete === 1) {
+        name.innerHTML = strikeText(task.name);
+        li.classList.add('complete');
+      } else {
+        name.innerHTML = task.name;
+      }
       li.appendChild(name);
       const desc = document.createElement('span');
       desc.classList.add('task-desc');
-      desc.innerHTML = task.description;
+      if (task.complete === 1) {
+        desc.innerHTML = strikeText(task.description);
+      } else {
+        desc.innerHTML = task.description;
+      }
       li.appendChild(desc);
       const project = document.createElement('span');
       project.classList.add('task-project');
@@ -155,18 +165,31 @@ function populateOverdueTasks() {
       line.classList.add('task-line');
       agendaList.insertBefore(line, overdueLine.nextSibling);
       const li = document.createElement('li');
-      li.classList.add('task-container'); // use task container to delete
+      li.classList.add('task-container');
       agendaList.insertBefore(li, overdueLine.nextSibling);
       const checkBox = document.createElement('span');
       checkBox.classList.add('check-box');
       li.appendChild(checkBox);
+      checkBox.addEventListener('click', completeTask);
+      // const innerCheckBox = document.createElement('span');
+      // innerCheckBox.classList.add('inner');
+      // checkBox.appendChild(innerCheckBox);
       const name = document.createElement('span');
       name.classList.add('task-name');
-      name.innerHTML = task.name;
+      if (task.complete === 1) {
+        name.innerHTML = strikeText(task.name);
+        li.classList.add('complete');
+      } else {
+        name.innerHTML = task.name;
+      }
       li.appendChild(name);
       const desc = document.createElement('span');
       desc.classList.add('task-desc');
-      desc.innerHTML = task.description;
+      if (task.complete === 1) {
+        desc.innerHTML = strikeText(task.description);
+      } else {
+        desc.innerHTML = task.description;
+      }
       li.appendChild(desc);
       const project = document.createElement('span');
       project.classList.add('task-project');
@@ -185,4 +208,18 @@ export function populateTasks() {
   populateTodaysTasks();
   populateOverdueTasks();
   checkForOverdue();
+}
+
+function strikeText(text) {
+  return text.split('').map(char => char + '\u0336').join('');
+}
+
+function completeTask(e) {
+  const striked = e.target.nextSibling.innerHTML;
+  const taskName = striked.replace(/[\u0336]/g, '');
+  const projectName = e.target.nextSibling.nextSibling.nextSibling.innerHTML;
+  const project = projects.find(project => project.project === projectName);
+  const task = project.tasks.find(task => task.name === taskName);
+  task.complete === 0 ? task.complete = 1 : task.complete = 0;
+  populateTasks();
 }

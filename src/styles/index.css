@@ -469,3 +469,7 @@ form:valid .add-task:hover {
 .check-box:hover .inner {
   background-color: #3f3f3f;
 }
+
+li.complete {
+  color: gray;
+}
