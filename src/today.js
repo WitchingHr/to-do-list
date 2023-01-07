@@ -57,6 +57,7 @@ function getTodaysTasks() {
     const tasks = project.tasks.filter(task => (task.date === today));
     tasks.forEach(task => todaysTasks.push(task));
   });
+  todaysTasks.reverse().sort((a, b) => (a.complete > b.complete) ? 1 : -1);
 }
 
 let overdueTasks = [];
@@ -67,6 +68,7 @@ function getOverdueTasks() {
     const tasks = project.tasks.filter(task => (task.date < today));
     tasks.forEach(task => overdueTasks.push(task));
   });
+  overdueTasks.reverse().sort((a, b) => (a.complete > b.complete) ? 1 : -1);
 }
 
 const agendaList = document.querySelector('.agenda-list');
@@ -159,7 +161,7 @@ function populateTodaysTasks() {
 function populateOverdueTasks() {
   getOverdueTasks();
   if (overdueTasks.length > 0) {
-    overdueTasks.reverse().forEach(task => {
+    overdueTasks.forEach(task => {
       const line = document.createElement('hr');
       line.classList.add('line');
       line.classList.add('task-line');
@@ -222,4 +224,8 @@ function completeTask(e) {
   const task = project.tasks.find(task => task.name === taskName);
   task.complete === 0 ? task.complete = 1 : task.complete = 0;
   populateTasks();
+}
+
+function sortByCompleted() {
+
 }
