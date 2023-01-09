@@ -436,10 +436,17 @@ form:valid .add-task:hover {
 
 .task-project {
   margin-left: auto;
-  border: 1px solid gray;
   border-radius: 5px;
   padding: 3px 5px;
   font-size: 14px;
+}
+
+.uncomplete-project {
+  border: 1px solid white;
+}
+
+.complete-project {
+  border: 1px solid gray;
 }
 
 .check-box {
@@ -472,4 +479,5 @@ form:valid .add-task:hover {
 
 li.complete {
   color: gray;
+  border-color: gray;
 }

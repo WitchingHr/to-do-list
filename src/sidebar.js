@@ -90,13 +90,18 @@ function closeInputByToggle() {
   li.remove();
 }
 
-export const projects = []
+export let projects = [];
+if (localStorage.projects) {
+  projects = JSON.parse(localStorage.projects);
+}
 
 function addProject(e) {
   const input = document.querySelector('.project-input');
 
   if (input === document.activeElement && e.key === 'Enter') {
     projects.push(Project(input.value));
+    localStorage.setItem('projects', JSON.stringify(projects));
+    console.log(JSON.parse(localStorage.projects));
     removeWindowListener();
     populateProjects();
   }
@@ -109,7 +114,10 @@ function Project(input) {
   }
 }
 
-projects.push(Project('To Do'));
+if (projects.length === 0) {
+  projects.push(Project('To Do'));
+}
+
 populateProjects();
 
 function addWindowListener() {

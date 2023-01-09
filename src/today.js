@@ -2,6 +2,7 @@ import openTask from './taskeditor'
 import { hideForm, getDateToday } from "./taskeditor";
 import { projects } from './sidebar';
 
+
 const todaySidebar = document.querySelector('.today');
 todaySidebar.addEventListener('click', populateToday);
 
@@ -127,11 +128,9 @@ function populateTodaysTasks() {
       agendaList.insertBefore(li, todayLine.nextSibling);
       const checkBox = document.createElement('span');
       checkBox.classList.add('check-box');
+      checkBox.setAttribute('title', 'Complete task');
       li.appendChild(checkBox);
       checkBox.addEventListener('click', completeTask);
-      // const innerCheckBox = document.createElement('span');
-      // innerCheckBox.classList.add('inner');
-      // checkBox.appendChild(innerCheckBox);
       const name = document.createElement('span');
       name.classList.add('task-name');
       if (task.complete === 1) {
@@ -152,6 +151,11 @@ function populateTodaysTasks() {
       const project = document.createElement('span');
       project.classList.add('task-project');
       project.innerHTML = task.project;
+      if (task.complete === 1) {
+        project.classList.add('complete-project');
+      } else {
+        project.classList.add('uncomplete-project');
+      }
       li.appendChild(project);
     });
   }
@@ -161,7 +165,7 @@ function populateTodaysTasks() {
 function populateOverdueTasks() {
   getOverdueTasks();
   if (overdueTasks.length > 0) {
-    overdueTasks.forEach(task => {
+    overdueTasks.reverse().forEach(task => {
       const line = document.createElement('hr');
       line.classList.add('line');
       line.classList.add('task-line');
@@ -171,11 +175,9 @@ function populateOverdueTasks() {
       agendaList.insertBefore(li, overdueLine.nextSibling);
       const checkBox = document.createElement('span');
       checkBox.classList.add('check-box');
+      checkBox.setAttribute('title', 'Complete task');
       li.appendChild(checkBox);
       checkBox.addEventListener('click', completeTask);
-      // const innerCheckBox = document.createElement('span');
-      // innerCheckBox.classList.add('inner');
-      // checkBox.appendChild(innerCheckBox);
       const name = document.createElement('span');
       name.classList.add('task-name');
       if (task.complete === 1) {
@@ -196,6 +198,11 @@ function populateOverdueTasks() {
       const project = document.createElement('span');
       project.classList.add('task-project');
       project.innerHTML = task.project;
+      if (task.complete === 1) {
+        project.classList.add('complete-project');
+      } else {
+        project.classList.add('uncomplete-project');
+      }
       li.appendChild(project);
     });
   }
@@ -223,9 +230,8 @@ function completeTask(e) {
   const project = projects.find(project => project.project === projectName);
   const task = project.tasks.find(task => task.name === taskName);
   task.complete === 0 ? task.complete = 1 : task.complete = 0;
+  localStorage.setItem('projects', JSON.stringify(projects));
   populateTasks();
 }
 
-function sortByCompleted() {
-
-}
+populateTasks();
