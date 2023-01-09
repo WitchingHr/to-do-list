@@ -9,6 +9,8 @@ export default function populateToday() {
   populateHeading();
   populateDate();
   updateTitle();
+  hideUpcoming();
+  showToday();
   checkForForm();
 }
 
@@ -44,7 +46,7 @@ function updateTitle() {
 const add = document.querySelector('.add');
 add.addEventListener('click', goToTaskAdder);
 
-function goToTaskAdder() {
+function goToTaskAdder() { // For + Button in header
   populateToday();
   openTask();
 }
@@ -64,7 +66,7 @@ overdueContainer.appendChild(overdue);
 const overdueLine = document.createElement('hr');
 overdueLine.classList.add('line');
 overdueLine.style.display = 'none';
-agendaList.insertBefore(overdueLine, addTaskButton);
+overdueContainer.appendChild(overdueLine);
 
 // Today
 const todayContainer = document.createElement('li');
@@ -77,7 +79,25 @@ today.classList.add('today-h2');
 todayContainer.appendChild(today);
 const todayLine = document.createElement('hr');
 todayLine.classList.add('line');
-agendaList.insertBefore(todayLine, addTaskButton);
+todayContainer.appendChild(todayLine);
+
+// This Week
+const weekContainer = document.createElement('li');
+weekContainer.classList.add('week-container');
+weekContainer.style.display = 'none';
+agendaList.insertBefore(weekContainer, addTaskButton);
+const thisWeek = document.createElement('h2');
+thisWeek.innerHTML = 'This week';
+thisWeek.classList.add('h2');
+thisWeek.classList.add('week-h2');
+weekContainer.appendChild(thisWeek);
+const weekLine = document.createElement('hr');
+weekLine.classList.add('line');
+weekContainer.appendChild(weekLine);
+
+function hideUpcoming() {
+  weekContainer.style.display = 'none';
+}
 
 let todaysTasks = [];
 function getTodaysTasks() {
@@ -113,6 +133,11 @@ function checkForOverdue() {
   }
 }
 
+function showToday() {
+  todayContainer.style.display = 'block';
+  checkForOverdue();
+}
+
 function populateTodaysTasks() {
   getTodaysTasks();
   if (todaysTasks.length > 0) {
@@ -120,10 +145,10 @@ function populateTodaysTasks() {
       const line = document.createElement('hr');
       line.classList.add('line');
       line.classList.add('task-line');
-      agendaList.insertBefore(line, todayLine.nextSibling);
+      todayContainer.insertBefore(line, todayLine.nextSibling); // agendalist
       const li = document.createElement('li');
       li.classList.add('task-container');
-      agendaList.insertBefore(li, todayLine.nextSibling);
+      todayContainer.insertBefore(li, todayLine.nextSibling); // agendalist
       const buttonWrap = document.createElement('span');
       buttonWrap.classList.add('task-button-wrapper');
       li.appendChild(buttonWrap);
@@ -174,10 +199,10 @@ function populateOverdueTasks() {
       const line = document.createElement('hr');
       line.classList.add('line');
       line.classList.add('task-line');
-      agendaList.insertBefore(line, overdueLine.nextSibling);
+      overdueContainer.insertBefore(line, overdueLine.nextSibling);
       const li = document.createElement('li');
       li.classList.add('task-container');
-      agendaList.insertBefore(li, overdueLine.nextSibling);
+      overdueContainer.insertBefore(li, overdueLine.nextSibling);
       const buttonWrap = document.createElement('span');
       buttonWrap.classList.add('task-button-wrapper');
       li.appendChild(buttonWrap);
