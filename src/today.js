@@ -2,7 +2,6 @@ import openTask from './taskeditor'
 import { hideForm, getDateToday } from "./taskeditor";
 import { projects } from './sidebar';
 
-
 const todaySidebar = document.querySelector('.today');
 todaySidebar.addEventListener('click', populateToday);
 
@@ -50,6 +49,36 @@ function goToTaskAdder() {
   openTask();
 }
 
+const agendaList = document.querySelector('.agenda-list');
+const addTaskButton = document.querySelector('.button-node');
+
+// Overdue
+const overdueContainer = document.createElement('li');
+overdueContainer.classList.add('overdue-container');
+overdueContainer.style.display = 'none';
+agendaList.insertBefore(overdueContainer, addTaskButton);
+const overdue = document.createElement('h2');
+overdue.innerHTML = 'Overdue';
+overdue.classList.add('h2');
+overdueContainer.appendChild(overdue);
+const overdueLine = document.createElement('hr');
+overdueLine.classList.add('line');
+overdueLine.style.display = 'none';
+agendaList.insertBefore(overdueLine, addTaskButton);
+
+// Today
+const todayContainer = document.createElement('li');
+todayContainer.classList.add('today-container');
+agendaList.insertBefore(todayContainer, addTaskButton);
+const today = document.createElement('h2');
+today.innerHTML = 'Today';
+today.classList.add('h2');
+today.classList.add('today-h2');
+todayContainer.appendChild(today);
+const todayLine = document.createElement('hr');
+todayLine.classList.add('line');
+agendaList.insertBefore(todayLine, addTaskButton);
+
 let todaysTasks = [];
 function getTodaysTasks() {
   todaysTasks = [];
@@ -71,37 +100,6 @@ function getOverdueTasks() {
   });
   overdueTasks.reverse().sort((a, b) => (a.complete > b.complete) ? 1 : -1);
 }
-
-const agendaList = document.querySelector('.agenda-list');
-const addTaskButton = document.querySelector('.button-node');
-
-// Overdue
-const overdueContainer = document.createElement('li');
-overdueContainer.classList.add('overdue-container');
-overdueContainer.style.display = 'none';
-agendaList.insertBefore(overdueContainer, addTaskButton);
-const overdue = document.createElement('h2');
-overdue.innerHTML = 'Overdue';
-overdue.classList.add('h2');
-overdueContainer.appendChild(overdue);
-const overdueLine = document.createElement('hr');
-overdueLine.classList.add('line');
-overdueLine.style.display = 'none';
-agendaList.insertBefore(overdueLine, addTaskButton);
-
-
-// Today
-const todayContainer = document.createElement('li');
-todayContainer.classList.add('today-container');
-agendaList.insertBefore(todayContainer, addTaskButton);
-const today = document.createElement('h2');
-today.innerHTML = 'Today';
-today.classList.add('h2');
-today.classList.add('today-h2');
-todayContainer.appendChild(today);
-const todayLine = document.createElement('hr');
-todayLine.classList.add('line');
-agendaList.insertBefore(todayLine, addTaskButton);
 
 function checkForOverdue() {
   if (overdueTasks.length > 0) {

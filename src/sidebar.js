@@ -60,7 +60,7 @@ function openInput() {
     const input = document.createElement('input');
     input.setAttribute('placeholder', 'New Project');
     input.setAttribute('type', 'text');
-    input.setAttribute('maxlength', '50');
+    input.setAttribute('maxlength', '20');
     input.classList.add('project-input');
     form.appendChild(input);
 

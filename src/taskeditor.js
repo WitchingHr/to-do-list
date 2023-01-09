@@ -36,6 +36,7 @@ function createForm() {
   const taskNameInput = document.createElement('input');
   taskNameInput.setAttribute('placeholder', 'Task Name');
   taskNameInput.setAttribute('type', 'text');
+  taskNameInput.setAttribute('maxlength', '30');
   taskNameInput.required = true;
   taskNameInput.classList.add('editor-input-top');
   inputs.appendChild(taskNameInput);
@@ -43,6 +44,7 @@ function createForm() {
   const taskDescriptInput = document.createElement('input');
   taskDescriptInput.setAttribute('placeholder', 'Task Description');
   taskDescriptInput.setAttribute('type', 'text');
+  taskDescriptInput.setAttribute('maxlength', '60');
   taskDescriptInput.classList.add('editor-input-bottom');
   inputs.appendChild(taskDescriptInput);
 
@@ -65,7 +67,7 @@ function createForm() {
   calendar.setAttribute('type', 'date');
   calendar.setAttribute('name', 'calendar');
 
-  // calendar.setAttribute('min', getDateToday());
+  calendar.setAttribute('min', getDateToday());
   calendar.setAttribute('value', getDateToday());
   calendar.classList.add('info-buttons');
   calendar.innerHTML = 'Today';
@@ -197,7 +199,6 @@ function submitTask(e) {
   if (validity) {
     projects[index].tasks.push(Task(name, description, project, date, complete));
     localStorage.setItem('projects', JSON.stringify(projects));
-    console.log(JSON.parse(localStorage.projects));
     hideForm();
   }
 }

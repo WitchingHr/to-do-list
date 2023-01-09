@@ -433,6 +433,7 @@ form:valid .add-task:hover {
 .task-button-wrapper {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   width: 70px;
   gap: 24px;
 }
@@ -447,7 +448,17 @@ form:valid .add-task:hover {
 }
 
 .task-name {
-  width: 120px;
+  flex-shrink: 0;
+  width: 220px;
+  white-space: nowrap;
+}
+
+.task-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .task-project {
@@ -455,6 +466,7 @@ form:valid .add-task:hover {
   border-radius: 5px;
   padding: 3px 5px;
   font-size: 14px;
+  white-space: nowrap;
 }
 
 .uncomplete-project {
