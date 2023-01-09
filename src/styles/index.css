@@ -430,6 +430,22 @@ form:valid .add-task:hover {
   border-color: #fefefe26;
 }
 
+.task-button-wrapper {
+  display: flex;
+  align-items: center;
+  width: 70px;
+  gap: 24px;
+}
+
+.delete-task {
+  font-size: 36px;
+  cursor: pointer;
+}
+
+.delete-task:hover {
+  color: white;
+}
+
 .task-name {
   width: 120px;
 }
