@@ -95,8 +95,23 @@ const weekLine = document.createElement('hr');
 weekLine.classList.add('line');
 weekContainer.appendChild(weekLine);
 
+// This Month
+const monthContainer = document.createElement('li');
+monthContainer.classList.add('month-container');
+monthContainer.style.display = 'none';
+agendaList.insertBefore(monthContainer, addTaskButton);
+const thisMonth = document.createElement('h2');
+thisMonth.innerHTML = 'This month';
+thisMonth.classList.add('h2');
+thisMonth.classList.add('month-h2');
+monthContainer.appendChild(thisMonth);
+const monthLine = document.createElement('hr');
+monthLine.classList.add('line');
+monthContainer.appendChild(monthLine);
+
 function hideUpcoming() {
   weekContainer.style.display = 'none';
+  monthContainer.style.display = 'none';
 }
 
 let todaysTasks = [];

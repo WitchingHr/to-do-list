@@ -29,10 +29,12 @@ const addTaskButton = document.querySelector('.button-node');
 const todayContainer = document.querySelector('.today-container');
 const overdueContainer = document.querySelector('.overdue-container');
 const weekContainer = document.querySelector('.week-container');
+const monthContainer = document.querySelector('.month-container');
 
 function showUpcoming() {
   // check for week, month
   weekContainer.style.display = 'block';
+  monthContainer.style.display = 'block';
 }
 
 function hideToday() {
