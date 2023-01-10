@@ -154,3 +154,35 @@ function clearProjectsFromDOM() {
     item.remove();
   })
 }
+
+let screenHolder;
+function resizeFn() {
+  if (window.innerWidth > 881) {
+    screenHolder = 1;
+  }
+  if (window.innerWidth < 879) {
+    screenHolder = 0;
+  }
+  if (window.innerWidth <= 880 && screenHolder === 1) {
+    closeSidebar();
+  } else if (window.innerWidth >= 880 && screenHolder === 0) {
+    openSidebar();
+  }
+
+}
+
+function closeSidebar() {
+  if (!sidebar.classList.contains('invisible')) {
+    sidebar.classList.add('invisible');
+    tasks.classList.remove('stretch');
+  }
+}
+
+function openSidebar() {
+  if (sidebar.classList.contains('invisible')) {
+    sidebar.classList.remove('invisible');
+    tasks.classList.add('stretch');
+  }
+}
+
+window.onresize = resizeFn;

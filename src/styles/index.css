@@ -463,10 +463,29 @@ form:valid .add-task:hover {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-width: 45px;
+}
+
+.task-date-project {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  flex-basis: 175px;
+  flex-shrink: 0;
+  gap: 15px;
 }
 
 .task-date {
-  margin-left: auto;
+  width: 32px;
+  text-align: center;
+}
+
+.date-uncomplete {
+  color: #68b4e7;
+}
+
+.date-complete {
+  color: gray;
 }
 
 .task-project {
@@ -474,6 +493,7 @@ form:valid .add-task:hover {
   padding: 3px 5px;
   font-size: 14px;
   white-space: nowrap;
+  margin-left: auto;
 }
 
 .uncomplete-project {
@@ -515,4 +535,8 @@ form:valid .add-task:hover {
 li.complete {
   color: gray;
   border-color: gray;
+}
+
+@media only screen and (min-width: 800px) {
+  
 }

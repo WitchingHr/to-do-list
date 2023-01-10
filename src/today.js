@@ -196,14 +196,17 @@ function populateTodaysTasks() {
       const desc = document.createElement('span');
       desc.classList.add('task-desc');
       li.appendChild(desc);
-      const date = document.createElement('span');
-      date.classList.add('task-date');
-      date.innerHTML = formatDate(task.date);
-      li.appendChild(date);
+      const dateProject = document.createElement('span');
+      dateProject.classList.add('task-date-project');
+      li.appendChild(dateProject);
       const project = document.createElement('span');
       project.classList.add('task-project');
       project.innerHTML = task.project;
-      li.appendChild(project);
+      dateProject.appendChild(project);
+      const date = document.createElement('span');
+      date.classList.add('task-date');
+      date.innerHTML = formatDate(task.date);
+      dateProject.appendChild(date);
 
       if (task.complete === 1) {
         checkBox.setAttribute('title', 'Uncomplete task');
@@ -212,12 +215,14 @@ function populateTodaysTasks() {
         li.classList.add('complete');
         desc.innerHTML = strikeText(task.description);
         project.classList.add('complete-project');
+        date.classList.add('date-complete');
       } else {
         checkBox.setAttribute('title', 'Complete task');
         del.style.display = 'none';
         name.innerHTML = task.name;
         desc.innerHTML = task.description;
         project.classList.add('uncomplete-project');
+        date.classList.add('date-uncomplete');
       }
     });
   }
@@ -254,14 +259,17 @@ function populateOverdueTasks() {
       const desc = document.createElement('span');
       desc.classList.add('task-desc');
       li.appendChild(desc);
-      const date = document.createElement('span');
-      date.classList.add('task-date');
-      date.innerHTML = formatDate(task.date);
-      li.appendChild(date);
+      const dateProject = document.createElement('span');
+      dateProject.classList.add('task-date-project');
+      li.appendChild(dateProject);
       const project = document.createElement('span');
       project.classList.add('task-project');
       project.innerHTML = task.project;
-      li.appendChild(project);
+      dateProject.appendChild(project);
+      const date = document.createElement('span');
+      date.classList.add('task-date');
+      date.innerHTML = formatDate(task.date);
+      dateProject.appendChild(date);
 
       if (task.complete === 1) {
         checkBox.setAttribute('title', 'Uncomplete task');
@@ -270,12 +278,14 @@ function populateOverdueTasks() {
         li.classList.add('complete');
         desc.innerHTML = strikeText(task.description);
         project.classList.add('complete-project');
+        date.classList.add('date-complete');
       } else {
         checkBox.setAttribute('title', 'Complete task');
         del.style.display = 'none';
         name.innerHTML = task.name;
         desc.innerHTML = task.description;
         project.classList.add('uncomplete-project');
+        date.classList.add('date-uncomplete');
       }
     });
   }
@@ -359,14 +369,17 @@ function populateWeeksTasks() {
       const desc = document.createElement('span');
       desc.classList.add('task-desc');
       li.appendChild(desc);
-      const date = document.createElement('span');
-      date.classList.add('task-date');
-      date.innerHTML = formatDate(task.date);
-      li.appendChild(date);
+      const dateProject = document.createElement('span');
+      dateProject.classList.add('task-date-project');
+      li.appendChild(dateProject);
       const project = document.createElement('span');
       project.classList.add('task-project');
       project.innerHTML = task.project;
-      li.appendChild(project);
+      dateProject.appendChild(project);
+      const date = document.createElement('span');
+      date.classList.add('task-date');
+      date.innerHTML = formatDate(task.date);
+      dateProject.appendChild(date);
 
       if (task.complete === 1) {
         checkBox.setAttribute('title', 'Uncomplete task');
@@ -375,12 +388,14 @@ function populateWeeksTasks() {
         li.classList.add('complete');
         desc.innerHTML = strikeText(task.description);
         project.classList.add('complete-project');
+        date.classList.add('date-complete');
       } else {
         checkBox.setAttribute('title', 'Complete task');
         del.style.display = 'none';
         name.innerHTML = task.name;
         desc.innerHTML = task.description;
         project.classList.add('uncomplete-project');
+        date.classList.add('date-uncomplete');
       }
     });
   }
@@ -417,14 +432,17 @@ function populateMonthsTasks() {
       const desc = document.createElement('span');
       desc.classList.add('task-desc');
       li.appendChild(desc);
-      const date = document.createElement('span');
-      date.classList.add('task-date');
-      date.innerHTML = formatDate(task.date);
-      li.appendChild(date);
+      const dateProject = document.createElement('span');
+      dateProject.classList.add('task-date-project');
+      li.appendChild(dateProject);
       const project = document.createElement('span');
       project.classList.add('task-project');
       project.innerHTML = task.project;
-      li.appendChild(project);
+      dateProject.appendChild(project);
+      const date = document.createElement('span');
+      date.classList.add('task-date');
+      date.innerHTML = formatDate(task.date);
+      dateProject.appendChild(date);
 
       if (task.complete === 1) {
         checkBox.setAttribute('title', 'Uncomplete task');
@@ -433,12 +451,14 @@ function populateMonthsTasks() {
         li.classList.add('complete');
         desc.innerHTML = strikeText(task.description);
         project.classList.add('complete-project');
+        date.classList.add('date-complete');
       } else {
         checkBox.setAttribute('title', 'Complete task');
         del.style.display = 'none';
         name.innerHTML = task.name;
         desc.innerHTML = task.description;
         project.classList.add('uncomplete-project');
+        date.classList.add('date-uncomplete');
       }
     });
   }
@@ -466,7 +486,7 @@ function strikeText(text) {
 function completeTask(e) {
   const striked = e.target.parentNode.nextSibling.innerHTML;
   const taskName = striked.replace(/[\u0336]/g, '');
-  const projectName = e.target.parentNode.nextSibling.nextSibling.nextSibling.innerHTML;
+  const projectName = e.target.parentNode.nextSibling.nextSibling.nextSibling.firstChild.innerHTML;
   const project = projects.find(project => project.project === projectName);
   const task = project.tasks.find(task => task.name === taskName);
   task.complete === 0 ? task.complete = 1 : task.complete = 0;
@@ -477,7 +497,7 @@ function completeTask(e) {
 function deleteTask(e) {
   const striked = e.target.parentNode.nextSibling.innerHTML;
   const taskName = striked.replace(/[\u0336]/g, '');
-  const projectName = e.target.parentNode.nextSibling.nextSibling.nextSibling.innerHTML;
+  const projectName = e.target.parentNode.nextSibling.nextSibling.nextSibling.firstChild.innerHTML;
   const project = projects.find(project => project.project === projectName);
   const task = project.tasks.findIndex(task => task.name === taskName);
   project.tasks.splice(task, 1);
