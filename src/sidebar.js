@@ -155,17 +155,10 @@ function clearProjectsFromDOM() {
   })
 }
 
-let screenHolder;
 function resizeFn() {
-  if (window.innerWidth > 881) {
-    screenHolder = 1;
-  }
-  if (window.innerWidth < 879) {
-    screenHolder = 0;
-  }
-  if (window.innerWidth <= 880 && screenHolder === 1) {
+  if (window.innerWidth <= 880) {
     closeSidebar();
-  } else if (window.innerWidth >= 880 && screenHolder === 0) {
+  } else if (window.innerWidth >= 880) {
     openSidebar();
   }
 
