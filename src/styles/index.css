@@ -465,8 +465,11 @@ form:valid .add-task:hover {
   text-overflow: ellipsis;
 }
 
-.task-project {
+.task-date {
   margin-left: auto;
+}
+
+.task-project {
   border-radius: 5px;
   padding: 3px 5px;
   font-size: 14px;

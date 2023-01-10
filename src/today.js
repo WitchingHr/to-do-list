@@ -196,6 +196,10 @@ function populateTodaysTasks() {
       const desc = document.createElement('span');
       desc.classList.add('task-desc');
       li.appendChild(desc);
+      const date = document.createElement('span');
+      date.classList.add('task-date');
+      date.innerHTML = formatDate(task.date);
+      li.appendChild(date);
       const project = document.createElement('span');
       project.classList.add('task-project');
       project.innerHTML = task.project;
@@ -250,6 +254,10 @@ function populateOverdueTasks() {
       const desc = document.createElement('span');
       desc.classList.add('task-desc');
       li.appendChild(desc);
+      const date = document.createElement('span');
+      date.classList.add('task-date');
+      date.innerHTML = formatDate(task.date);
+      li.appendChild(date);
       const project = document.createElement('span');
       project.classList.add('task-project');
       project.innerHTML = task.project;
@@ -351,6 +359,10 @@ function populateWeeksTasks() {
       const desc = document.createElement('span');
       desc.classList.add('task-desc');
       li.appendChild(desc);
+      const date = document.createElement('span');
+      date.classList.add('task-date');
+      date.innerHTML = formatDate(task.date);
+      li.appendChild(date);
       const project = document.createElement('span');
       project.classList.add('task-project');
       project.innerHTML = task.project;
@@ -405,6 +417,10 @@ function populateMonthsTasks() {
       const desc = document.createElement('span');
       desc.classList.add('task-desc');
       li.appendChild(desc);
+      const date = document.createElement('span');
+      date.classList.add('task-date');
+      date.innerHTML = formatDate(task.date);
+      li.appendChild(date);
       const project = document.createElement('span');
       project.classList.add('task-project');
       project.innerHTML = task.project;
@@ -467,6 +483,23 @@ function deleteTask(e) {
   project.tasks.splice(task, 1);
   localStorage.setItem('projects', JSON.stringify(projects));
   populateTasks();
+}
+
+function formatDate(date) {
+  const array = date.split('-');
+  const months = [
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+  ];
+  const month = array[1] - 1;
+  const day = array[2].split('');
+  let newDay;
+  if (day[0] === '0') {
+    newDay = day[1];
+  } else {
+    newDay = day.join('');
+  }
+  return months[month] + ' ' + newDay;
 }
 
 populateTasks();
