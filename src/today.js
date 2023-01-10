@@ -1,6 +1,7 @@
 import openTask from './taskeditor'
 import { hideForm, getDateToday } from "./taskeditor";
 import { projects } from './sidebar';
+import { getMonth, getWeek, getTomorrow } from './upcoming';
 
 const todaySidebar = document.querySelector('.today');
 todaySidebar.addEventListener('click', populateToday);
@@ -69,7 +70,7 @@ overdueLine.style.display = 'none';
 overdueContainer.appendChild(overdueLine);
 
 // Today
-const todayContainer = document.createElement('li');
+export const todayContainer = document.createElement('li');
 todayContainer.classList.add('today-container');
 agendaList.insertBefore(todayContainer, addTaskButton);
 const today = document.createElement('h2');
@@ -109,6 +110,17 @@ const monthLine = document.createElement('hr');
 monthLine.classList.add('line');
 monthContainer.appendChild(monthLine);
 
+export function hideToday() {
+  todayContainer.style.display = 'none';
+  overdueContainer.style.display = 'none';
+}
+
+export function showUpcoming() {
+  // check for week, month
+  weekContainer.style.display = 'block';
+  monthContainer.style.display = 'block';
+}
+
 function hideUpcoming() {
   weekContainer.style.display = 'none';
   monthContainer.style.display = 'none';
@@ -137,7 +149,8 @@ function getOverdueTasks() {
 }
 
 function checkForOverdue() {
-  if (overdueTasks.length > 0) {
+  const page = document.querySelector('.agenda-heading');
+  if (overdueTasks.length > 0 && page.innerHTML === 'Today') {
     overdueContainer.style.display = 'block';
     overdueLine.style.display = 'block';
     today.style.marginTop = '40px';
@@ -261,6 +274,161 @@ function populateOverdueTasks() {
   return;
 }
 
+let weeksTasks = [];
+function getWeeksTasks() {
+  weeksTasks = [];
+  const tomorrow = getTomorrow();
+  const week = getWeek();
+  projects.forEach(project => {
+    const tasks = project.tasks.filter(task => (task.date >= tomorrow && task.date <= week));
+    tasks.forEach(task => weeksTasks.push(task));
+  });
+  weeksTasks.reverse().sort((a, b) => (a.date > b.date) ? -1 : 1);
+  weeksTasks.sort((a, b) => (a.complete > b.complete) ? 1 : -1);
+}
+
+let monthsTasks = [];
+function getMonthsTasks() {
+  monthsTasks = [];
+  const week = getWeek();
+  const month = getMonth();
+  projects.forEach(project => {
+    const tasks = project.tasks.filter(task => (task.date > week && task.date <= month));
+    tasks.forEach(task => monthsTasks.push(task));
+  });
+  monthsTasks.reverse().sort((a, b) => (a.date > b.date) ? -1 : 1);
+  monthsTasks.sort((a, b) => (a.complete > b.complete) ? 1 : -1);
+}
+
+function checkForWeek() {
+  const page = document.querySelector('.agenda-heading');
+  if (weeksTasks.length > 0 && page.innerHTML === 'Upcoming') {
+    weekContainer.style.display = 'block';
+  } else {
+    weekContainer.style.display = 'none';
+  }
+}
+
+function checkForMonth() {
+  const page = document.querySelector('.agenda-heading');
+  if (monthsTasks.length > 0 && page.innerHTML === 'Upcoming') {
+    monthContainer.style.display = 'block';
+    if (weeksTasks.length > 0) {
+      thisMonth.style.marginTop = '40px';
+    }
+  } else {
+    monthContainer.style.display = 'none';
+  }
+}
+
+function populateWeeksTasks() {
+  getWeeksTasks();
+  if (weeksTasks.length > 0) {
+    weeksTasks.reverse().forEach(task => {
+      const line = document.createElement('hr');
+      line.classList.add('line');
+      line.classList.add('task-line');
+      weekContainer.insertBefore(line, weekLine.nextSibling); // agendalist
+      const li = document.createElement('li');
+      li.classList.add('task-container');
+      weekContainer.insertBefore(li, weekLine.nextSibling); // agendalist
+      const buttonWrap = document.createElement('span');
+      buttonWrap.classList.add('task-button-wrapper');
+      li.appendChild(buttonWrap);
+      const checkBox = document.createElement('span');
+      checkBox.classList.add('check-box');
+      buttonWrap.appendChild(checkBox);
+      checkBox.addEventListener('click', completeTask);
+      const del = document.createElement('span');
+      del.innerHTML = '&times;';
+      del.classList.add('delete-task');
+      del.setAttribute('title', 'Delete task');
+      del.addEventListener('click', deleteTask);
+      buttonWrap.appendChild(del);
+      const name = document.createElement('span');
+      name.classList.add('task-name');
+      li.appendChild(name);
+      const desc = document.createElement('span');
+      desc.classList.add('task-desc');
+      li.appendChild(desc);
+      const project = document.createElement('span');
+      project.classList.add('task-project');
+      project.innerHTML = task.project;
+      li.appendChild(project);
+
+      if (task.complete === 1) {
+        checkBox.setAttribute('title', 'Uncomplete task');
+        del.style.display = 'block';
+        name.innerHTML = strikeText(task.name);
+        li.classList.add('complete');
+        desc.innerHTML = strikeText(task.description);
+        project.classList.add('complete-project');
+      } else {
+        checkBox.setAttribute('title', 'Complete task');
+        del.style.display = 'none';
+        name.innerHTML = task.name;
+        desc.innerHTML = task.description;
+        project.classList.add('uncomplete-project');
+      }
+    });
+  }
+  return;
+}
+
+function populateMonthsTasks() {
+  getMonthsTasks();
+  if (monthsTasks.length > 0) {
+    monthsTasks.reverse().forEach(task => {
+      const line = document.createElement('hr');
+      line.classList.add('line');
+      line.classList.add('task-line');
+      monthContainer.insertBefore(line, monthLine.nextSibling);
+      const li = document.createElement('li');
+      li.classList.add('task-container');
+      monthContainer.insertBefore(li, monthLine.nextSibling);
+      const buttonWrap = document.createElement('span');
+      buttonWrap.classList.add('task-button-wrapper');
+      li.appendChild(buttonWrap);
+      const checkBox = document.createElement('span');
+      checkBox.classList.add('check-box');
+      buttonWrap.appendChild(checkBox);
+      checkBox.addEventListener('click', completeTask);
+      const del = document.createElement('span');
+      del.innerHTML = '&times;';
+      del.classList.add('delete-task');
+      del.setAttribute('title', 'Delete task');
+      del.addEventListener('click', deleteTask);
+      buttonWrap.appendChild(del);
+      const name = document.createElement('span');
+      name.classList.add('task-name');
+      li.appendChild(name);
+      const desc = document.createElement('span');
+      desc.classList.add('task-desc');
+      li.appendChild(desc);
+      const project = document.createElement('span');
+      project.classList.add('task-project');
+      project.innerHTML = task.project;
+      li.appendChild(project);
+
+      if (task.complete === 1) {
+        checkBox.setAttribute('title', 'Uncomplete task');
+        del.style.display = 'block';
+        name.innerHTML = strikeText(task.name);
+        li.classList.add('complete');
+        desc.innerHTML = strikeText(task.description);
+        project.classList.add('complete-project');
+      } else {
+        checkBox.setAttribute('title', 'Complete task');
+        del.style.display = 'none';
+        name.innerHTML = task.name;
+        desc.innerHTML = task.description;
+        project.classList.add('uncomplete-project');
+      }
+    });
+  }
+  return;
+}
+
 export function populateTasks() {
   const printed = document.querySelectorAll('.task-container');
   printed.forEach(task => task.remove());
@@ -268,7 +436,11 @@ export function populateTasks() {
   lines.forEach(line => line.remove());
   populateTodaysTasks();
   populateOverdueTasks();
+  populateWeeksTasks();
+  populateMonthsTasks();
   checkForOverdue();
+  checkForWeek();
+  checkForMonth();
 }
 
 function strikeText(text) {

@@ -1,15 +1,14 @@
-import { checkForForm } from "./today";
+import { checkForForm, hideToday, populateTasks } from "./today";
 
 const upcomingSidebar = document.querySelector('.upcoming');
 upcomingSidebar.addEventListener('click', populateUpcoming);
-upcomingSidebar.addEventListener('click', hideToday);
 
 export default function populateUpcoming() {
   populateHeading();
   updateTitle();
   hideToday();
-  showUpcoming();
   checkForForm();
+  populateTasks();
 }
 
 function populateHeading() {
@@ -24,20 +23,26 @@ function updateTitle() {
   document.title = 'To Do: Upcoming';
 }
 
-const agendaList = document.querySelector('.agenda-list');
-const addTaskButton = document.querySelector('.button-node');
-const todayContainer = document.querySelector('.today-container');
-const overdueContainer = document.querySelector('.overdue-container');
-const weekContainer = document.querySelector('.week-container');
-const monthContainer = document.querySelector('.month-container');
-
-function showUpcoming() {
-  // check for week, month
-  weekContainer.style.display = 'block';
-  monthContainer.style.display = 'block';
+export function getTomorrow() {
+  const offset = (new Date()).getTimezoneOffset() * 60000;
+  const date = new Date(Date.now() - offset);
+  date.setDate(date.getDate() + 1);
+  const tomorrow = date.toISOString().split('T')[0];
+  return tomorrow;
 }
 
-function hideToday() {
-  todayContainer.style.display = 'none';
-  overdueContainer.style.display = 'none';
+export function getWeek() {
+  const offset = (new Date()).getTimezoneOffset() * 60000;
+  const date = new Date(Date.now() - offset);
+  date.setDate(date.getDate() + 7);
+  const week = date.toISOString().split('T')[0];
+  return week;
+}
+
+export function getMonth() {
+  const offset = (new Date()).getTimezoneOffset() * 60000;
+  const date = new Date(Date.now() - offset);
+  date.setDate(date.getDate() + 30);
+  const month = date.toISOString().split('T')[0];
+  return month;
 }
