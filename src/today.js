@@ -116,7 +116,6 @@ export function hideToday() {
 }
 
 export function showUpcoming() {
-  // check for week, month
   weekContainer.style.display = 'block';
   monthContainer.style.display = 'block';
 }
