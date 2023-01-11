@@ -225,7 +225,7 @@ window.onresize = resizeFn;
 
 const smokeScreen = document.querySelector('.smoke-screen');
 
-function toggleSidebarSmallScreen() {
+export function toggleSidebarSmallScreen() {
   sidebar.classList.toggle('invisible');
   if (sidebar.classList.contains('invisible')) {
     isOpen = false;

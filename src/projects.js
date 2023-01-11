@@ -1,4 +1,4 @@
-import { project, isOpen } from "./sidebar";
+import { project, isOpen, toggleSidebarSmallScreen } from "./sidebar";
 import { checkForForm, hideToday, populateTasks, hideUpcoming, showProject } from "./today";
 
 const deleteProject = document.querySelector('.delete-project');
@@ -21,6 +21,9 @@ export default function populateProjectScreen() {
   showProject();
   checkForForm();
   populateTasks();
+  if (window.innerWidth <= 880) {
+    toggleSidebarSmallScreen();
+  }
 }
 
 function populateHeading() {

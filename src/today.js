@@ -1,6 +1,6 @@
 import openTask from './taskeditor'
 import { hideForm, getDateToday } from "./taskeditor";
-import { projects, project } from './sidebar';
+import { projects, project, toggleSidebarSmallScreen } from './sidebar';
 import { getMonth, getWeek, getTomorrow } from './upcoming';
 import { hideDeleteProject } from './projects';
 
@@ -16,6 +16,9 @@ export default function populateToday() {
   hideProject();
   showToday();
   checkForForm();
+  if (window.innerWidth <= 880) {
+    toggleSidebarSmallScreen();
+  }
 }
 
 export function checkForForm() {

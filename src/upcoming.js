@@ -1,5 +1,6 @@
 import { checkForForm, hideToday, populateTasks } from "./today";
 import { hideDeleteProject } from "./projects";
+import { toggleSidebarSmallScreen } from "./sidebar";
 
 const upcomingSidebar = document.querySelector('.upcoming');
 upcomingSidebar.addEventListener('click', populateUpcoming);
@@ -11,6 +12,9 @@ export default function populateUpcoming() {
   hideToday();
   checkForForm();
   populateTasks();
+  if (window.innerWidth <= 880) {
+    toggleSidebarSmallScreen();
+  }
 }
 
 function populateHeading() {
