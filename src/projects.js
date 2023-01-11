@@ -61,11 +61,13 @@ function openDeleteModal() {
   modal.appendChild(buttonWrap);
   const cancel = document.createElement('button');
   cancel.classList.add('delete-cancel');
+  cancel.classList.add('delete-btn');
   cancel.innerHTML = 'Cancel';
   buttonWrap.appendChild(cancel);
   cancel.addEventListener('click', closeModal);
   const confirm = document.createElement('button');
   confirm.classList.add('delete-confirm');
+  confirm.classList.add('delete-btn');
   confirm.innerHTML = 'Delete';
   buttonWrap.appendChild(confirm);
   container.addEventListener('click', closeModalByClick);

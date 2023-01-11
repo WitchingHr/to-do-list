@@ -56,11 +56,11 @@ body {
   z-index: 2;
   width: 300px;
   top: 25%;
-  background-color: white;
-  border: 1px solid gray;
+  background-color: #0c1319;
+  border: 1px solid lightskyblue;
   border-radius: 5px;
-  box-shadow: 0px 2px 3px 0px #80808063;
   color: gray;
+  box-shadow: 0px 0px 5px 0px lightcoral;
 }
 
 .modal-stretch {
@@ -69,6 +69,53 @@ body {
 
 .modal-unstretch {
   left: calc(50% - 150px);
+}
+
+.question {
+  font-weight: bold;
+  padding: 7px 10px;
+  color: lightcoral;
+}
+
+.info {
+  padding: 0px 10px 15px;
+  font-size: 15px;
+  text-align: center;
+  color: white;
+}
+
+.delete-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 0 8px 0;
+}
+
+.delete-btn {
+  padding: 5px 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+  width: 65px;
+  border: none;
+}
+
+.delete-cancel {
+  background-color: white;
+}
+
+.delete-cancel:hover {
+  background-color: rgb(225, 225, 225);
+}
+
+.delete-confirm {
+  background-color: rgb(64, 64, 64);
+  color: white;
+}
+
+.delete-confirm:hover {
+  background-color: rgb(44, 44, 44);
 }
 
 /* Document */
