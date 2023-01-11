@@ -1,7 +1,8 @@
 import openTask from './taskeditor'
 import { hideForm, getDateToday } from "./taskeditor";
-import { projects } from './sidebar';
+import { projects, project } from './sidebar';
 import { getMonth, getWeek, getTomorrow } from './upcoming';
+import { hideDeleteProject } from './projects';
 
 const todaySidebar = document.querySelector('.today');
 todaySidebar.addEventListener('click', populateToday);
@@ -10,7 +11,9 @@ export default function populateToday() {
   populateHeading();
   populateDate();
   updateTitle();
+  hideDeleteProject();
   hideUpcoming();
+  hideProject();
   showToday();
   checkForForm();
 }
@@ -110,6 +113,20 @@ const monthLine = document.createElement('hr');
 monthLine.classList.add('line');
 monthContainer.appendChild(monthLine);
 
+// Project
+const projectContainer = document.createElement('li');
+projectContainer.classList.add('project-container');
+projectContainer.style.display = 'none';
+agendaList.insertBefore(projectContainer, addTaskButton);
+const projectHead = document.createElement('h2');
+projectHead.innerHTML = 'Project';
+projectHead.classList.add('h2');
+projectHead.classList.add('project-h2');
+projectContainer.appendChild(projectHead);
+const projectLine = document.createElement('hr');
+projectLine.classList.add('line');
+projectContainer.appendChild(projectLine);
+
 export function hideToday() {
   todayContainer.style.display = 'none';
   overdueContainer.style.display = 'none';
@@ -120,9 +137,17 @@ export function showUpcoming() {
   monthContainer.style.display = 'block';
 }
 
-function hideUpcoming() {
+export function hideUpcoming() {
   weekContainer.style.display = 'none';
   monthContainer.style.display = 'none';
+}
+
+export function showProject() {
+  projectContainer.style.display = 'block';
+}
+
+export function hideProject() {
+  projectContainer.style.display = 'none';
 }
 
 let todaysTasks = [];
@@ -473,6 +498,77 @@ function populateMonthsTasks() {
   return;
 }
 
+let projectTasks = [];
+function getProjectTasks() {
+  projectTasks = [];
+  const projectObj = projects.find(obj => obj.project === project);
+  projectTasks = projectObj.tasks;
+  projectTasks.reverse().sort((a, b) => (a.date > b.date) ? -1 : 1);
+  projectTasks.sort((a, b) => (a.complete > b.complete) ? 1 : -1);
+}
+
+function populateProjectTasks() {
+  getProjectTasks();
+  projectTasks.reverse().forEach(task => {
+    const line = document.createElement('hr');
+    line.classList.add('line');
+    line.classList.add('task-line');
+    projectContainer.insertBefore(line, projectLine.nextSibling);
+    const li = document.createElement('li');
+    li.classList.add('task-container');
+    projectContainer.insertBefore(li, projectLine.nextSibling);
+    const buttonWrap = document.createElement('span');
+    buttonWrap.classList.add('task-button-wrapper');
+    li.appendChild(buttonWrap);
+    const checkBox = document.createElement('span');
+    checkBox.classList.add('check-box');
+    buttonWrap.appendChild(checkBox);
+    checkBox.addEventListener('click', completeTask);
+    const del = document.createElement('span');
+    del.innerHTML = '&times;';
+    del.classList.add('delete-task');
+    del.setAttribute('title', 'Delete task');
+    del.addEventListener('click', deleteTask);
+    buttonWrap.appendChild(del);
+    const name = document.createElement('span');
+    name.classList.add('task-name');
+    li.appendChild(name);
+    const desc = document.createElement('span');
+    desc.classList.add('task-desc');
+    li.appendChild(desc);
+    const dateProject = document.createElement('span');
+    dateProject.classList.add('task-date-project');
+    li.appendChild(dateProject);
+    const project = document.createElement('span');
+    project.classList.add('task-project');
+    project.innerHTML = task.project;
+    dateProject.appendChild(project);
+    const date = document.createElement('span');
+    date.classList.add('task-date');
+    date.innerHTML = formatDate(task.date);
+    dateProject.appendChild(date);
+
+    if (task.complete === 1) {
+      checkBox.setAttribute('title', 'Uncomplete task');
+      del.style.display = 'block';
+      name.innerHTML = strikeText(task.name);
+      li.classList.add('complete');
+      desc.innerHTML = strikeText(task.description);
+      desc.classList.add('desc-complete');
+      project.classList.add('complete-project');
+      date.classList.add('date-complete');
+    } else {
+      checkBox.setAttribute('title', 'Complete task');
+      del.style.display = 'none';
+      name.innerHTML = task.name;
+      desc.innerHTML = task.description;
+      desc.classList.add('desc-uncomplete');
+      project.classList.add('uncomplete-project');
+      date.classList.add('date-uncomplete');
+    }
+  });
+}
+
 export function populateTasks() {
   const printed = document.querySelectorAll('.task-container');
   printed.forEach(task => task.remove());
@@ -485,6 +581,7 @@ export function populateTasks() {
   checkForOverdue();
   checkForWeek();
   checkForMonth();
+  populateProjectTasks();
 }
 
 function strikeText(text) {

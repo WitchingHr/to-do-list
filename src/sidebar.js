@@ -1,12 +1,20 @@
+import populateProjectScreen from "./projects";
+
 const hamburger = document.querySelector('.hamburger');
 hamburger.addEventListener('click', toggleSidebar);
 
 const sidebar = document.querySelector('.sidebar');
 const tasks = document.querySelector('.tasks');
 
+export let isOpen = true;
 export default function toggleSidebar() {
   sidebar.classList.toggle('invisible');
   tasks.classList.toggle('stretch');
+  if (sidebar.classList.contains('invisible')) {
+    isOpen = false;
+  } else {
+    isOpen = true;
+  }
 }
 
 const projectsToggle = document.querySelector('.projects-toggle-container');
@@ -135,24 +143,53 @@ function populateProjects() {
     li.classList.add('sidebar-item');
     li.classList.add('project-li');
     list.appendChild(li);
+    li.addEventListener('click', getProjectByLi);
     const projectWrapper = document.createElement('div');
     projectWrapper.classList.add('project-wrapper');
     li.appendChild(projectWrapper);
+    projectWrapper.addEventListener('click', getProjectByWrapper);
     const icon = document.createElement('span');
     icon.innerHTML = '&#128211;'
     projectWrapper.appendChild(icon);
+    icon.addEventListener('click', getProjectFromIcon);
     const projectName = document.createElement('span');
     projectName.classList.add('project-span');
     projectName.innerHTML = project.project;
     projectWrapper.appendChild(projectName);
-  })
+    projectName.addEventListener('click', getProject);
+  });
 }
 
 function clearProjectsFromDOM() {
   const projectListItems = document.querySelectorAll('.project-li');
   projectListItems.forEach(item => {
     item.remove();
-  })
+  });
+}
+
+export let project = 'To Do';
+function getProjectByLi(e) {
+  project = e.target.firstChild.lastChild.innerHTML;
+  e.stopImmediatePropagation();
+  populateProjectScreen();
+}
+
+function getProjectByWrapper(e) {
+  project = e.target.lastChild.innerHTML;
+  e.stopImmediatePropagation();
+  populateProjectScreen();
+}
+
+function getProject(e) {
+  project = e.target.innerHTML;
+  e.stopImmediatePropagation();
+  populateProjectScreen();
+}
+
+function getProjectFromIcon(e) {
+  project = e.target.nextSibling.innerHTML;
+  e.stopImmediatePropagation();
+  populateProjectScreen();
 }
 
 function resizeFn() {
@@ -171,6 +208,7 @@ function resizeFn() {
 function closeSidebar() {
   if (!sidebar.classList.contains('invisible')) {
     sidebar.classList.add('invisible');
+    isOpen = false;
     tasks.classList.remove('stretch');
   }
 }
@@ -178,6 +216,7 @@ function closeSidebar() {
 function openSidebar() {
   if (sidebar.classList.contains('invisible')) {
     sidebar.classList.remove('invisible');
+    isOpen = true;
     tasks.classList.add('stretch');
   }
 }
@@ -188,6 +227,11 @@ const smokeScreen = document.querySelector('.smoke-screen');
 
 function toggleSidebarSmallScreen() {
   sidebar.classList.toggle('invisible');
+  if (sidebar.classList.contains('invisible')) {
+    isOpen = false;
+  } else {
+    isOpen = true;
+  }
   if (smokeScreen.style.display === 'none') {
     smokeScreen.style.display = 'block';
   } else {

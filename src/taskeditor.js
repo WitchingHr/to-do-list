@@ -66,8 +66,7 @@ function createForm() {
   calendar.classList.add('calendar');
   calendar.setAttribute('type', 'date');
   calendar.setAttribute('name', 'calendar');
-
-  // calendar.setAttribute('min', getDateToday()); // TURN ME ONNNNNNNNNNNNNNNNNN
+  calendar.setAttribute('min', getDateToday());
   calendar.setAttribute('value', getDateToday());
   calendar.classList.add('info-buttons');
   calendar.innerHTML = 'Today';

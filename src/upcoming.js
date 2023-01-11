@@ -1,4 +1,5 @@
 import { checkForForm, hideToday, populateTasks } from "./today";
+import { hideDeleteProject } from "./projects";
 
 const upcomingSidebar = document.querySelector('.upcoming');
 upcomingSidebar.addEventListener('click', populateUpcoming);
@@ -6,6 +7,7 @@ upcomingSidebar.addEventListener('click', populateUpcoming);
 export default function populateUpcoming() {
   populateHeading();
   updateTitle();
+  hideDeleteProject();
   hideToday();
   checkForForm();
   populateTasks();
