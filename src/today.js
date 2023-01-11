@@ -214,6 +214,7 @@ function populateTodaysTasks() {
         name.innerHTML = strikeText(task.name);
         li.classList.add('complete');
         desc.innerHTML = strikeText(task.description);
+        desc.classList.add('desc-complete');
         project.classList.add('complete-project');
         date.classList.add('date-complete');
       } else {
@@ -221,6 +222,7 @@ function populateTodaysTasks() {
         del.style.display = 'none';
         name.innerHTML = task.name;
         desc.innerHTML = task.description;
+        desc.classList.add('desc-uncomplete');
         project.classList.add('uncomplete-project');
         date.classList.add('date-uncomplete');
       }
@@ -277,6 +279,7 @@ function populateOverdueTasks() {
         name.innerHTML = strikeText(task.name);
         li.classList.add('complete');
         desc.innerHTML = strikeText(task.description);
+        desc.classList.add('desc-complete');
         project.classList.add('complete-project');
         date.classList.add('date-complete');
       } else {
@@ -284,6 +287,7 @@ function populateOverdueTasks() {
         del.style.display = 'none';
         name.innerHTML = task.name;
         desc.innerHTML = task.description;
+        desc.classList.add('desc-uncomplete');
         project.classList.add('uncomplete-project');
         date.classList.add('date-uncomplete');
       }
@@ -387,6 +391,7 @@ function populateWeeksTasks() {
         name.innerHTML = strikeText(task.name);
         li.classList.add('complete');
         desc.innerHTML = strikeText(task.description);
+        desc.classList.add('desc-complete');
         project.classList.add('complete-project');
         date.classList.add('date-complete');
       } else {
@@ -394,6 +399,7 @@ function populateWeeksTasks() {
         del.style.display = 'none';
         name.innerHTML = task.name;
         desc.innerHTML = task.description;
+        desc.classList.add('desc-uncomplete');
         project.classList.add('uncomplete-project');
         date.classList.add('date-uncomplete');
       }
@@ -450,6 +456,7 @@ function populateMonthsTasks() {
         name.innerHTML = strikeText(task.name);
         li.classList.add('complete');
         desc.innerHTML = strikeText(task.description);
+        desc.classList.add('desc-complete');
         project.classList.add('complete-project');
         date.classList.add('date-complete');
       } else {
@@ -457,6 +464,7 @@ function populateMonthsTasks() {
         del.style.display = 'none';
         name.innerHTML = task.name;
         desc.innerHTML = task.description;
+        desc.classList.add('desc-uncomplete');
         project.classList.add('uncomplete-project');
         date.classList.add('date-uncomplete');
       }

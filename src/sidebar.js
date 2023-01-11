@@ -158,8 +158,12 @@ function clearProjectsFromDOM() {
 function resizeFn() {
   if (window.innerWidth <= 880) {
     closeSidebar();
+    hamburger.removeEventListener('click', toggleSidebar);
+    hamburger.addEventListener('click', toggleSidebarSmallScreen);
   } else if (window.innerWidth >= 880) {
     openSidebar();
+    hamburger.removeEventListener('click', toggleSidebarSmallScreen);
+    hamburger.addEventListener('click', toggleSidebar);
   }
 
 }
@@ -179,3 +183,14 @@ function openSidebar() {
 }
 
 window.onresize = resizeFn;
+
+const smokeScreen = document.querySelector('.smoke-screen');
+
+function toggleSidebarSmallScreen() {
+  sidebar.classList.toggle('invisible');
+  if (smokeScreen.style.display === 'none') {
+    smokeScreen.style.display = 'block';
+  } else {
+    smokeScreen.style.display = 'none';
+  }
+}
