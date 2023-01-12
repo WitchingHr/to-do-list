@@ -107,11 +107,17 @@ function addProject(e) {
   const input = document.querySelector('.project-input');
 
   if (input === document.activeElement && e.key === 'Enter') {
-    projects.push(Project(input.value));
-    localStorage.setItem('projects', JSON.stringify(projects));
-    removeWindowListener();
-    populateProjects();
+    if (checkForDuplicate(input.value) === false) {
+      projects.push(Project(input.value));
+      localStorage.setItem('projects', JSON.stringify(projects));
+      removeWindowListener();
+      populateProjects();
+    }
   }
+}
+
+function checkForDuplicate(input) {
+  return projects.some(obj => obj.project === input);
 }
 
 function Project(input) {
