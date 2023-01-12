@@ -231,6 +231,7 @@ const smokeScreen = document.querySelector('.smoke-screen');
 
 export function toggleSidebarSmallScreen() {
   sidebar.classList.toggle('invisible');
+  tasks.classList.remove('stretch');
   if (sidebar.classList.contains('invisible')) {
     isOpen = false;
   } else {
@@ -246,3 +247,5 @@ function toggleSmoke() {
     smokeScreen.style.display = 'block';
   }
 }
+
+window.onload = resizeFn;

@@ -54,7 +54,6 @@ const add = document.querySelector('.add');
 add.addEventListener('click', goToTaskAdder);
 
 function goToTaskAdder() { // For + Button in header
-  populateToday();
   openTask();
 }
 
@@ -115,6 +114,20 @@ monthContainer.appendChild(thisMonth);
 const monthLine = document.createElement('hr');
 monthLine.classList.add('line');
 monthContainer.appendChild(monthLine);
+
+// Someday
+const somedayContainer = document.createElement('li');
+somedayContainer.classList.add('someday-container');
+somedayContainer.style.display = 'none';
+agendaList.insertBefore(somedayContainer, addTaskButton);
+const someday = document.createElement('h2');
+someday.innerHTML = 'Someday';
+someday.classList.add('h2');
+someday.classList.add('someday-h2');
+somedayContainer.appendChild(someday);
+const somedayLine = document.createElement('hr');
+somedayLine.classList.add('line');
+somedayContainer.appendChild(somedayLine);
 
 // Project
 const projectContainer = document.createElement('li');
@@ -350,6 +363,18 @@ function getMonthsTasks() {
   monthsTasks.sort((a, b) => (a.complete > b.complete) ? 1 : -1);
 }
 
+let somedaysTasks = [];
+function getSomedaysTasks() {
+  somedaysTasks = [];
+  const month = getMonth();
+  projects.forEach(project => {
+    const tasks = project.tasks.filter(task => (task.date > month));
+    tasks.forEach(task => somedaysTasks.push(task));
+  });
+  somedaysTasks.reverse().sort((a, b) => (a.date > b.date) ? -1 : 1);
+  somedaysTasks.sort((a, b) => (a.complete > b.complete) ? 1 : -1);
+}
+
 function checkForWeek() {
   const page = document.querySelector('.agenda-heading');
   if (weeksTasks.length > 0 && page.innerHTML === 'Upcoming') {
@@ -368,6 +393,18 @@ function checkForMonth() {
     }
   } else {
     monthContainer.style.display = 'none';
+  }
+}
+
+function checkForSomeday() {
+  const page = document.querySelector('.agenda-heading');
+  if (somedaysTasks.length > 0 && page.innerHTML === 'Upcoming') {
+    somedayContainer.style.display = 'block';
+    if (monthsTasks.length > 0) {
+      someday.style.marginTop = '40px';
+    }
+  } else {
+    somedayContainer.style.display = 'none';
   }
 }
 
@@ -447,6 +484,71 @@ function populateMonthsTasks() {
       const li = document.createElement('li');
       li.classList.add('task-container');
       monthContainer.insertBefore(li, monthLine.nextSibling);
+      const buttonWrap = document.createElement('span');
+      buttonWrap.classList.add('task-button-wrapper');
+      li.appendChild(buttonWrap);
+      const checkBox = document.createElement('span');
+      checkBox.classList.add('check-box');
+      buttonWrap.appendChild(checkBox);
+      checkBox.addEventListener('click', completeTask);
+      const del = document.createElement('span');
+      del.innerHTML = '&times;';
+      del.classList.add('delete-task');
+      del.setAttribute('title', 'Delete task');
+      del.addEventListener('click', deleteTask);
+      buttonWrap.appendChild(del);
+      const name = document.createElement('span');
+      name.classList.add('task-name');
+      li.appendChild(name);
+      const desc = document.createElement('span');
+      desc.classList.add('task-desc');
+      li.appendChild(desc);
+      const dateProject = document.createElement('span');
+      dateProject.classList.add('task-date-project');
+      li.appendChild(dateProject);
+      const project = document.createElement('span');
+      project.classList.add('task-project');
+      project.innerHTML = task.project;
+      dateProject.appendChild(project);
+      const date = document.createElement('span');
+      date.classList.add('task-date');
+      date.innerHTML = formatDate(task.date);
+      dateProject.appendChild(date);
+
+      if (task.complete === 1) {
+        checkBox.setAttribute('title', 'Uncomplete task');
+        del.style.display = 'block';
+        name.innerHTML = strikeText(task.name);
+        li.classList.add('complete');
+        desc.innerHTML = strikeText(task.description);
+        desc.classList.add('desc-complete');
+        project.classList.add('complete-project');
+        date.classList.add('date-complete');
+      } else {
+        checkBox.setAttribute('title', 'Complete task');
+        del.style.display = 'none';
+        name.innerHTML = task.name;
+        desc.innerHTML = task.description;
+        desc.classList.add('desc-uncomplete');
+        project.classList.add('uncomplete-project');
+        date.classList.add('date-uncomplete');
+      }
+    });
+  }
+  return;
+}
+
+function populateSomedaysTasks() {
+  getSomedaysTasks();
+  if (somedaysTasks.length > 0) {
+    somedaysTasks.reverse().forEach(task => {
+      const line = document.createElement('hr');
+      line.classList.add('line');
+      line.classList.add('task-line');
+      somedayContainer.insertBefore(line, somedayLine.nextSibling);
+      const li = document.createElement('li');
+      li.classList.add('task-container');
+      somedayContainer.insertBefore(li, somedayLine.nextSibling);
       const buttonWrap = document.createElement('span');
       buttonWrap.classList.add('task-button-wrapper');
       li.appendChild(buttonWrap);
@@ -581,9 +683,11 @@ export function populateTasks() {
   populateOverdueTasks();
   populateWeeksTasks();
   populateMonthsTasks();
+  populateSomedaysTasks();
   checkForOverdue();
   checkForWeek();
   checkForMonth();
+  checkForSomeday();
   populateProjectTasks();
 }
 

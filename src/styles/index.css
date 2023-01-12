@@ -13,6 +13,10 @@ body {
   color: var(--font-color-dark);
 }
 
+.content {
+  min-width: 320px;
+}
+
 /* Project Modal */
 .modal-container {
   display: none;
@@ -638,6 +642,10 @@ li.complete {
 }
 
 @media only screen and (max-width: 768px) {
+  .task-name {
+    width: auto;
+  }
+
   .task-desc {
     display: none;
   }
