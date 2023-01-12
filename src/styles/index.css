@@ -219,11 +219,19 @@ ul {
   background-color: #1e557a;
 }
 
+.projects-list {
+  overflow: scroll;
+  height: 60vh;
+}
+
 .projects {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: 5px;
+  background-color: #27648d;
+  position: sticky;
+  top: 0;
 }
 
 .projects:hover {
