@@ -109,7 +109,6 @@ function addProject(e) {
   if (input === document.activeElement && e.key === 'Enter') {
     projects.push(Project(input.value));
     localStorage.setItem('projects', JSON.stringify(projects));
-    console.log(JSON.parse(localStorage.projects));
     removeWindowListener();
     populateProjects();
   }
@@ -136,7 +135,7 @@ function removeWindowListener() {
   window.removeEventListener('keydown', addProject);
 }
 
-function populateProjects() {
+export function populateProjects() {
   clearProjectsFromDOM();
   projects.forEach(project => {
     const li = document.createElement('li');
@@ -168,6 +167,11 @@ function clearProjectsFromDOM() {
 }
 
 export let project = 'To Do';
+
+export function initializeProject() {
+  project = 'To Do';
+}
+
 function getProjectByLi(e) {
   project = e.target.firstChild.lastChild.innerHTML;
   e.stopImmediatePropagation();

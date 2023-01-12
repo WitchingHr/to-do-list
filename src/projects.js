@@ -1,20 +1,26 @@
-import { project, isOpen, toggleSidebarSmallScreen } from "./sidebar";
+import { project, isOpen, toggleSidebarSmallScreen, projects, populateProjects, initializeProject } from "./sidebar";
 import { checkForForm, hideToday, populateTasks, hideUpcoming, showProject } from "./today";
+import populateToday from "./today";
 
-const deleteProject = document.querySelector('.delete-project');
-deleteProject.addEventListener('click', openDeleteModal);
+const heading = document.querySelector('.agenda-heading');
+
+const deleteProjectButton = document.querySelector('.delete-project');
+deleteProjectButton.addEventListener('click', openDeleteModal);
 
 function showDeleteProject() {
-  deleteProject.style.display = 'block';
+  if (heading.innerHTML != 'To Do') {
+    deleteProjectButton.style.display = 'block';
+  }
 }
 
 export function hideDeleteProject() {
-  deleteProject.style.display = 'none';
+  deleteProjectButton.style.display = 'none';
 }
 
 export default function populateProjectScreen() {
   populateHeading();
   updateTitle();
+  hideDeleteProject();
   showDeleteProject();
   hideToday();
   hideUpcoming();
@@ -27,7 +33,6 @@ export default function populateProjectScreen() {
 }
 
 function populateHeading() {
-  const heading = document.querySelector('.agenda-heading');
   heading.innerHTML = project;
   const d = document.querySelector('.header-date');
   d.innerHTML = '';
@@ -37,7 +42,10 @@ function updateTitle() {
   document.title = `To Do: ${project}`;
 }
 
+const smokeScreen = document.querySelector('.smoke-screen');
+
 function openDeleteModal() {
+  smokeScreen.style.display = 'block';
   const container = document.querySelector('.modal-container');
   container.style.display = 'block';
   const modal = document.createElement('div');
@@ -70,6 +78,7 @@ function openDeleteModal() {
   confirm.classList.add('delete-btn');
   confirm.innerHTML = 'Delete';
   buttonWrap.appendChild(confirm);
+  confirm.addEventListener('click', deleteProject);
   container.addEventListener('click', closeModalByClick);
 }
 
@@ -78,6 +87,7 @@ function closeModal() {
   const container = document.querySelector('.modal-container');
   modal.remove();
   container.style.display = 'none';
+  smokeScreen.style.display = 'none';
   container.removeEventListener('click', closeModalByClick);
 }
 
@@ -86,4 +96,14 @@ function closeModalByClick(e) {
   if (e.target === container) {
     closeModal();
   }
+}
+
+function deleteProject() {
+  const index = projects.findIndex(obj => obj.project === project);
+  projects.splice(index, 1);
+  localStorage.setItem('projects', JSON.stringify(projects));
+  initializeProject();
+  populateProjects();
+  populateToday();
+  closeModal();
 }

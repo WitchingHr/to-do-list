@@ -184,6 +184,7 @@ body {
 
 /* Sidebar */
 .sidebar {
+  z-index: 2;
   display: flex;
   flex-direction: column;
   width: 200px;
@@ -629,21 +630,16 @@ li.complete {
   border-color: gray;
 }
 
+.smoke-screen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 @media only screen and (max-width: 768px) {
   .task-desc {
     display: none;
-  }
-
-  .sidebar {
-    z-index: 2;
-  }
-
-  .smoke-screen {
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
   }
 
   .agenda-container {
