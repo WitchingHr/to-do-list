@@ -1,4 +1,4 @@
-import { project, projects } from './sidebar';
+import { projects } from './sidebar';
 import { populateTasks } from './today';
 
 addAddTaskListener();
@@ -203,7 +203,6 @@ function focusDate() {
 function submitTask(e) {
   e.preventDefault();
   const nameInput = document.querySelector('.editor-input-top');
-  // nameInput.setCustomValidity('');
   const descInput = document.querySelector('.editor-input-bottom');
   const cal = document.querySelector('.calendar');
   const proj = document.querySelector('.project-info');
@@ -216,7 +215,7 @@ function submitTask(e) {
   const form = document.querySelector('.editor');
   const bool = projects[index].tasks.some(task => task.name === name);
   if (bool) {
-    nameInput.setCustomValidity('Task already exists');
+    nameInput.setCustomValidity('Task already exists in this project');
   }
   let validity = form.reportValidity();
   if (validity) {

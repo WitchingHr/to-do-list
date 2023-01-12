@@ -256,8 +256,10 @@ export function toggleSidebarSmallScreen() {
 function toggleSmoke() {
   if (isOpen === false) {
     smokeScreen.style.display = 'none';
+    smokeScreen.removeEventListener('click', toggleSidebarSmallScreen)
   } else {
     smokeScreen.style.display = 'block';
+    smokeScreen.addEventListener('click', toggleSidebarSmallScreen)
   }
 }
 
