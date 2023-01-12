@@ -263,3 +263,5 @@ function resetValidity() {
   const input = document.querySelector('.editor-input-top');
   input.setCustomValidity('');
 }
+
+console.log(projects);

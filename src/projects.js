@@ -102,8 +102,9 @@ function deleteProject() {
   const index = projects.findIndex(obj => obj.project === project);
   projects.splice(index, 1);
   localStorage.setItem('projects', JSON.stringify(projects));
-  initializeProject();
-  populateProjects();
-  populateToday();
   closeModal();
+  initializeProject();
+  populateToday();
+  populateProjects();
+  populateTasks();
 }
