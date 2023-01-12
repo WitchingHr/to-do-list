@@ -3,6 +3,7 @@ import { populateTasks } from './today';
 
 addAddTaskListener();
 
+const heading = document.querySelector('.agenda-heading');
 const list = document.querySelector('.agenda-list');
 
 export default function openTaskAdder() {
@@ -76,7 +77,11 @@ function createForm() {
   const projectBtn = document.createElement('button');
   projectBtn.classList.add('info-buttons');
   projectBtn.classList.add('project-info');
-  projectBtn.innerHTML = 'To Do';
+  if (heading.innerHTML != 'Today' && heading.innerHTML != 'Upcoming') {
+    projectBtn.innerHTML = heading.innerHTML;
+  } else {
+    projectBtn.innerHTML = 'To Do';
+  }
   dateProjectBar.appendChild(projectBtn);
   addProjectListener();
   

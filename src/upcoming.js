@@ -1,4 +1,4 @@
-import { checkForForm, hideToday, populateTasks } from "./today";
+import { checkForForm, hideToday, populateTasks, hideProject } from "./today";
 import { hideDeleteProject } from "./projects";
 import { toggleSidebarSmallScreen } from "./sidebar";
 
@@ -10,6 +10,7 @@ export default function populateUpcoming() {
   updateTitle();
   hideDeleteProject();
   hideToday();
+  hideProject();
   checkForForm();
   populateTasks();
   if (window.innerWidth <= 880) {

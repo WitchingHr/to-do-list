@@ -236,9 +236,13 @@ export function toggleSidebarSmallScreen() {
   } else {
     isOpen = true;
   }
-  if (smokeScreen.style.display === 'none') {
-    smokeScreen.style.display = 'block';
-  } else {
+  toggleSmoke();
+}
+
+function toggleSmoke() {
+  if (isOpen === false) {
     smokeScreen.style.display = 'none';
+  } else {
+    smokeScreen.style.display = 'block';
   }
 }
