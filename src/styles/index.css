@@ -222,6 +222,7 @@ ul {
 .projects-list {
   overflow: scroll;
   height: 60vh;
+  margin: 0;
 }
 
 .projects {
@@ -381,6 +382,11 @@ h1 {
 
 .delete-project:hover {
   text-decoration: underline;
+}
+
+.agenda-list {
+  overflow: scroll;
+  height: 75vh;
 }
 
 button.agenda-add-task {

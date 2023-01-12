@@ -144,10 +144,13 @@ function removeWindowListener() {
 export function populateProjects() {
   clearProjectsFromDOM();
   projects.forEach(project => {
+    const newList = document.createElement('ul');
+    newList.classList.add('project-innner-list');
+    list.appendChild(newList);
     const li = document.createElement('li');
     li.classList.add('sidebar-item');
     li.classList.add('project-li');
-    list.appendChild(li);
+    newList.appendChild(li);
     li.addEventListener('click', getProjectByLi);
     const projectWrapper = document.createElement('div');
     projectWrapper.classList.add('project-wrapper');
@@ -208,7 +211,11 @@ function resizeFn() {
     hamburger.removeEventListener('click', toggleSidebar);
     hamburger.addEventListener('click', toggleSidebarSmallScreen);
   } else if (window.innerWidth >= 880) {
-    openSidebar();
+    if (isOpen === true) {
+      smokeScreen.style.display = 'none';
+    } else {
+      openSidebar();
+    }
     hamburger.removeEventListener('click', toggleSidebarSmallScreen);
     hamburger.addEventListener('click', toggleSidebar);
   }

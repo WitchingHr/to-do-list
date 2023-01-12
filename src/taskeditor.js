@@ -9,6 +9,17 @@ const list = document.querySelector('.agenda-list');
 export default function openTaskAdder() {
   hideButton();
   createForm();
+  addEnterListener();
+}
+
+function addEnterListener() {
+  window.addEventListener('keydown', submitTaskByEnter);
+}
+
+function submitTaskByEnter(e) {
+  if (e.key === 'Enter') {
+    submitTask(e);
+  }
 }
 
 export function getDateToday() {
@@ -102,7 +113,6 @@ function createForm() {
   addTask.innerHTML = 'Add Task';
   saveBar.appendChild(addTask);
   addTask.addEventListener('click', submitTask);
-  addTask.addEventListener('click', populateTasks);
 
   taskNameInput.focus();
 }
@@ -110,6 +120,7 @@ function createForm() {
 export function hideForm() {
   const form = document.querySelector('.li-form');
   form.remove();
+  window.removeEventListener('keydown', submitTaskByEnter);
   showButton();
 }
 
@@ -204,6 +215,7 @@ function submitTask(e) {
     projects[index].tasks.push(Task(name, description, project, date, complete));
     localStorage.setItem('projects', JSON.stringify(projects));
     hideForm();
+    populateTasks();
   }
 }
 

@@ -151,11 +151,13 @@ export function hideToday() {
 export function showUpcoming() {
   weekContainer.style.display = 'block';
   monthContainer.style.display = 'block';
+  somedayContainer.style.display = 'block';
 }
 
 export function hideUpcoming() {
   weekContainer.style.display = 'none';
   monthContainer.style.display = 'none';
+  somedayContainer.style.display = 'none';
 }
 
 export function showProject() {
