@@ -1,4 +1,4 @@
-import { projects } from './sidebar';
+import { project, projects } from './sidebar';
 import { populateTasks } from './today';
 
 addAddTaskListener();
@@ -52,6 +52,9 @@ function createForm() {
   taskNameInput.required = true;
   taskNameInput.classList.add('editor-input-top');
   inputs.appendChild(taskNameInput);
+  taskNameInput.oninput = () => {
+    taskNameInput.setCustomValidity('');
+  }
 
   const taskDescriptInput = document.createElement('input');
   taskDescriptInput.setAttribute('placeholder', 'Task Description');
@@ -200,6 +203,7 @@ function focusDate() {
 function submitTask(e) {
   e.preventDefault();
   const nameInput = document.querySelector('.editor-input-top');
+  // nameInput.setCustomValidity('');
   const descInput = document.querySelector('.editor-input-bottom');
   const cal = document.querySelector('.calendar');
   const proj = document.querySelector('.project-info');
@@ -210,10 +214,16 @@ function submitTask(e) {
   const complete = 0;
   const index = projects.findIndex(obj => obj.project === project);
   const form = document.querySelector('.editor');
+  const bool = projects[index].tasks.some(task => task.name === name);
+  if (bool) {
+    nameInput.setCustomValidity('Task already exists');
+  }
   let validity = form.reportValidity();
   if (validity) {
     projects[index].tasks.push(Task(name, description, project, date, complete));
     localStorage.setItem('projects', JSON.stringify(projects));
+    console.log(projects);
+    console.log(JSON.parse(localStorage.projects));
     hideForm();
     populateTasks();
   }

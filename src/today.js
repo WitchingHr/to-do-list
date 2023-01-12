@@ -176,7 +176,9 @@ function getTodaysTasks() {
     const tasks = project.tasks.filter(task => (task.date === today));
     tasks.forEach(task => todaysTasks.push(task));
   });
-  todaysTasks.reverse().sort((a, b) => (a.complete > b.complete) ? 1 : -1);
+  todaysTasks.sort((a, b) => (a.complete > b.complete) ? 1 : -1);
+  // console.log(projects);
+  // console.log(todaysTasks);
 }
 
 let overdueTasks = [];

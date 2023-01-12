@@ -99,7 +99,7 @@ function closeInputByToggle() {
 }
 
 export let projects = [];
-if (localStorage.projects) {
+if (projects.length === 0 && localStorage.projects) {
   projects = JSON.parse(localStorage.projects);
 }
 
