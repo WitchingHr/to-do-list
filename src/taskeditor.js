@@ -220,10 +220,8 @@ function submitTask(e) {
   }
   let validity = form.reportValidity();
   if (validity) {
-    projects[index].tasks.push(Task(name, description, project, date, complete));
+    projects[index].tasks.reverse().push(Task(name, description, project, date, complete));
     localStorage.setItem('projects', JSON.stringify(projects));
-    console.log(projects);
-    console.log(JSON.parse(localStorage.projects));
     hideForm();
     populateTasks();
   }
@@ -263,5 +261,3 @@ function resetValidity() {
   const input = document.querySelector('.editor-input-top');
   input.setCustomValidity('');
 }
-
-console.log(projects);

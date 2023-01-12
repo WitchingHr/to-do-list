@@ -176,7 +176,8 @@ function getTodaysTasks() {
     const tasks = project.tasks.filter(task => (task.date === today));
     tasks.forEach(task => todaysTasks.push(task));
   });
-  todaysTasks.sort((a, b) => (a.complete > b.complete) ? 1 : -1);
+  todaysTasks.sort((a, b) => (a.name > b.name) ? -1 : 1);
+  todaysTasks.sort((a, b) => (a.complete > b.complete) ? -1 : 1);
 }
 
 let overdueTasks = [];
@@ -187,8 +188,9 @@ function getOverdueTasks() {
     const tasks = project.tasks.filter(task => (task.date < today));
     tasks.forEach(task => overdueTasks.push(task));
   });
-  overdueTasks.reverse().sort((a, b) => (a.date > b.date) ? -1 : 1);
-  overdueTasks.sort((a, b) => (a.complete > b.complete) ? 1 : -1);
+  overdueTasks.sort((a, b) => (a.name > b.name) ? -1 : 1);
+  overdueTasks.sort((a, b) => (a.date > b.date) ? -1 : 1);
+  overdueTasks.sort((a, b) => (a.complete > b.complete) ? -1 : 1);
 }
 
 function checkForOverdue() {
@@ -212,7 +214,7 @@ function showToday() {
 function populateTodaysTasks() {
   getTodaysTasks();
   if (todaysTasks.length > 0) {
-    todaysTasks.reverse().forEach(task => {
+    todaysTasks.forEach(task => {
       const line = document.createElement('hr');
       line.classList.add('line');
       line.classList.add('task-line');
@@ -277,7 +279,7 @@ function populateTodaysTasks() {
 function populateOverdueTasks() {
   getOverdueTasks();
   if (overdueTasks.length > 0) {
-    overdueTasks.reverse().forEach(task => {
+    overdueTasks.forEach(task => {
       const line = document.createElement('hr');
       line.classList.add('line');
       line.classList.add('task-line');
@@ -348,8 +350,9 @@ function getWeeksTasks() {
     const tasks = project.tasks.filter(task => (task.date >= tomorrow && task.date <= week));
     tasks.forEach(task => weeksTasks.push(task));
   });
-  weeksTasks.reverse().sort((a, b) => (a.date > b.date) ? -1 : 1);
-  weeksTasks.sort((a, b) => (a.complete > b.complete) ? 1 : -1);
+  weeksTasks.sort((a, b) => (a.name > b.name) ? -1 : 1);
+  weeksTasks.sort((a, b) => (a.date > b.date) ? -1 : 1);
+  weeksTasks.sort((a, b) => (a.complete > b.complete) ? -1 : 1);
 }
 
 let monthsTasks = [];
@@ -361,8 +364,9 @@ function getMonthsTasks() {
     const tasks = project.tasks.filter(task => (task.date > week && task.date <= month));
     tasks.forEach(task => monthsTasks.push(task));
   });
-  monthsTasks.reverse().sort((a, b) => (a.date > b.date) ? -1 : 1);
-  monthsTasks.sort((a, b) => (a.complete > b.complete) ? 1 : -1);
+  monthsTasks.sort((a, b) => (a.name > b.name) ? -1 : 1);
+  monthsTasks.sort((a, b) => (a.date > b.date) ? -1 : 1);
+  monthsTasks.sort((a, b) => (a.complete > b.complete) ? -1 : 1);
 }
 
 let somedaysTasks = [];
@@ -373,8 +377,9 @@ function getSomedaysTasks() {
     const tasks = project.tasks.filter(task => (task.date > month));
     tasks.forEach(task => somedaysTasks.push(task));
   });
-  somedaysTasks.reverse().sort((a, b) => (a.date > b.date) ? -1 : 1);
-  somedaysTasks.sort((a, b) => (a.complete > b.complete) ? 1 : -1);
+  somedaysTasks.sort((a, b) => (a.name > b.name) ? -1 : 1);
+  somedaysTasks.sort((a, b) => (a.date > b.date) ? -1 : 1);
+  somedaysTasks.sort((a, b) => (a.complete > b.complete) ? -1 : 1);
 }
 
 function checkForWeek() {
@@ -413,7 +418,7 @@ function checkForSomeday() {
 function populateWeeksTasks() {
   getWeeksTasks();
   if (weeksTasks.length > 0) {
-    weeksTasks.reverse().forEach(task => {
+    weeksTasks.forEach(task => {
       const line = document.createElement('hr');
       line.classList.add('line');
       line.classList.add('task-line');
@@ -478,7 +483,7 @@ function populateWeeksTasks() {
 function populateMonthsTasks() {
   getMonthsTasks();
   if (monthsTasks.length > 0) {
-    monthsTasks.reverse().forEach(task => {
+    monthsTasks.forEach(task => {
       const line = document.createElement('hr');
       line.classList.add('line');
       line.classList.add('task-line');
@@ -543,7 +548,7 @@ function populateMonthsTasks() {
 function populateSomedaysTasks() {
   getSomedaysTasks();
   if (somedaysTasks.length > 0) {
-    somedaysTasks.reverse().forEach(task => {
+    somedaysTasks.forEach(task => {
       const line = document.createElement('hr');
       line.classList.add('line');
       line.classList.add('task-line');
