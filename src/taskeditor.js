@@ -170,6 +170,7 @@ function openProjectModal(e) {
     li.innerHTML = project.project;
     list.appendChild(li);
     li.addEventListener('click', updateProjectBtn);
+    li.addEventListener('click', resetValidity);
   });
   container.addEventListener('click', closeModalByClick);
 }
@@ -256,4 +257,9 @@ function addAddTaskListener() {
 function addCancelListener() {
   const cancelBtn = document.querySelector('.cancel');
   cancelBtn.addEventListener('click', hideForm);
+}
+
+function resetValidity() {
+  const input = document.querySelector('.editor-input-top');
+  input.setCustomValidity('');
 }
