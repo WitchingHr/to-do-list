@@ -394,6 +394,7 @@ h1 {
 
 button.agenda-add-task {
   padding: 0;
+  margin-top: 10px;
   width: 100%;
   background: none;
   border: none;
@@ -701,7 +702,7 @@ li.complete {
 
 @media only screen and (max-width: 480px) {
   .header-left {
-    gap: 35px;
+    gap: 30px;
   }
   
   .header-btn {

@@ -338,7 +338,6 @@ function populateOverdueTasks() {
       }
     });
   }
-  return;
 }
 
 let weeksTasks = [];
@@ -477,7 +476,6 @@ function populateWeeksTasks() {
       }
     });
   }
-  return;
 }
 
 function populateMonthsTasks() {
@@ -542,7 +540,6 @@ function populateMonthsTasks() {
       }
     });
   }
-  return;
 }
 
 function populateSomedaysTasks() {
@@ -607,7 +604,6 @@ function populateSomedaysTasks() {
       }
     });
   }
-  return;
 }
 
 let projectTasks = [];

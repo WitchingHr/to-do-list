@@ -246,7 +246,7 @@ function submitTask(e) {
   }
 }
 
-function Task(name, description, project, date, complete) {
+export function Task(name, description, project, date, complete) {
   return {
     name,
     description,

@@ -1,5 +1,6 @@
 import populateProjectScreen from "./projects";
-import { hideForm } from "./taskeditor";
+import { hideForm, Task, getDateToday } from "./taskeditor";
+import { getMonth, getTomorrow, getWeek } from "./upcoming";
 
 const sidebar = document.querySelector('.sidebar');
 const tasks = document.querySelector('.tasks');
@@ -109,6 +110,20 @@ addProjectBtn.addEventListener('click', openInput);
 export let projects = [];
 if (projects.length === 0 && localStorage.projects) {
   projects = JSON.parse(localStorage.projects);
+} else {
+  projects.push(Project('To Do'));
+    projects[0].tasks.reverse().push(Task('Go for walk outside', 'Theres a whole world out there', 'To Do', getDateToday(), 0));
+    projects[0].tasks.reverse().push(Task('Clean the kitchen', 'It should look nice', 'To Do', getTomorrow(), 0));
+  projects.push(Project('My Project'));
+    projects[1].tasks.reverse().push(Task('Finish project', 'Almost done...', 'My Project', getWeek(), 0));
+  projects.push(Project('Groceries'));
+    projects[2].tasks.reverse().push(Task('Buy some chicken', 'Pollo', 'Groceries', getDateToday(), 0));
+    projects[2].tasks.reverse().push(Task('Buy some bananas', 'Chiquita', 'Groceries', getDateToday(), 0));
+  projects.push(Project('Gym'));
+    projects[3].tasks.reverse().push(Task('Leg Day', 'Deadlift, Back squat, Leg Extentions', 'Gym', getDateToday(), 0));
+    projects[3].tasks.reverse().push(Task('Chest Day', 'Bench press, Incline', 'Gym', getTomorrow(), 0));
+  projects.push(Project('School'));
+    projects[4].tasks.reverse().push(Task('Finish class', 'You can do this!', 'School', getMonth(), 0));
 }
 
 function checkForDuplicate(input) {
@@ -122,9 +137,9 @@ function Project(input) {
   }
 }
 
-if (projects.length === 0) {
-  projects.push(Project('To Do'));
-}
+// if (projects.length === 0) {
+//   projects.push(Project('To Do'));
+// }
 
 export let project = 'To Do';
 
