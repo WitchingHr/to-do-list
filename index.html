@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To Do: Today</title>
+  <script defer src="main.js"></script>
+</head>
+<body>
+  <div class="content">
+    <div class="modal-container"></div>
+    <div class="header">
+      <div class="header-left">
+        <button class="hamburger"></button>
+        <form action="./index.html">
+          <button type="submit" class="home"></button>
+        </form>
+      </div>
+      <div class="header-right">
+        <button class="add"></button>
+        <button class="profile"></button>
+      </div>
+    </div>
+    <div class="main">
+      <div class="sidebar">
+        <div class="sidebar-top">
+          <ul class="sidebar-list">
+            <li class="sidebar-item today"><span class="today">Today</span></li>
+            <li class="sidebar-item upcoming"><span class="upcoming">Upcoming</span></li>
+          </ul>
+        </div>
+        <div class="project-container">
+          <div class="projects">
+            <span class="sidebar-item project-click">Projects</span>
+            <div class="project-buttons">
+              <div class="add-project-button-container">
+                <button class="add-project"></button>
+              </div>
+              <div class="projects-toggle-container">
+                <button class="projects-toggle"></button>
+              </div>
+            </div>
+          </div>
+          <ul class="projects-list">
+          </ul>
+        </div>
+      </div>
+      <div class="smoke-screen" style="display: none;"></div>
+      <div class="tasks stretch">
+        <div class="agenda-container">
+          <div class="agenda-header">
+            <h1>
+              <span class="agenda-heading"></span>
+              <span class="header-date"></span>
+              <button class="delete-project" style="display: none;">Delete project</button>
+            </h1>
+          </div>
+          <div class="agenda-content">
+            <ul class="agenda-list">
+              <li class="button-node">
+                <button class="agenda-add-task">
+                  Add task
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
