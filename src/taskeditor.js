@@ -183,14 +183,14 @@ function openProjectModal(e) {
   modal.style.top = `${position[1]}px`;
   modal.style.left = `${position[0]}px`;
   container.appendChild(modal);
-  const list = document.createElement('ul');
-  list.classList.add('modal-list');
-  modal.appendChild(list);
+  const projectList = document.createElement('ul');
+  projectList.classList.add('modal-list');
+  modal.appendChild(projectList);
   projects.forEach(project => {
     const li = document.createElement('li');
     li.classList.add('modal-li');
     li.innerHTML = project.project;
-    list.appendChild(li);
+    projectList.appendChild(li);
     li.addEventListener('click', updateProjectBtn);
     li.addEventListener('click', resetValidity);
   });

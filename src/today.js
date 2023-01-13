@@ -171,9 +171,9 @@ export function hideProject() {
 let todaysTasks = [];
 function getTodaysTasks() {
   todaysTasks = [];
-  const today = getDateToday();
-  projects.forEach(project => {
-    const tasks = project.tasks.filter(task => (task.date === today));
+  const todaysDate = getDateToday();
+  projects.forEach(projectObj => {
+    const tasks = projectObj.tasks.filter(task => (task.date === todaysDate));
     tasks.forEach(task => todaysTasks.push(task));
   });
   todaysTasks.sort((a, b) => (a.name > b.name) ? -1 : 1);
@@ -183,9 +183,9 @@ function getTodaysTasks() {
 let overdueTasks = [];
 function getOverdueTasks() {
   overdueTasks = [];
-  const today = getDateToday();
-  projects.forEach(project => {
-    const tasks = project.tasks.filter(task => (task.date < today));
+  const todaysDate = getDateToday();
+  projects.forEach(projectObj => {
+    const tasks = projectObj.tasks.filter(task => (task.date < todaysDate));
     tasks.forEach(task => overdueTasks.push(task));
   });
   overdueTasks.sort((a, b) => (a.name > b.name) ? -1 : 1);
@@ -273,7 +273,6 @@ function populateTodaysTasks() {
       }
     });
   }
-  return;
 }
 
 function populateOverdueTasks() {
@@ -345,8 +344,8 @@ function getWeeksTasks() {
   weeksTasks = [];
   const tomorrow = getTomorrow();
   const week = getWeek();
-  projects.forEach(project => {
-    const tasks = project.tasks.filter(task => (task.date >= tomorrow && task.date <= week));
+  projects.forEach(projectObj => {
+    const tasks = projectObj.tasks.filter(task => (task.date >= tomorrow && task.date <= week));
     tasks.forEach(task => weeksTasks.push(task));
   });
   weeksTasks.sort((a, b) => (a.name > b.name) ? -1 : 1);
@@ -359,8 +358,8 @@ function getMonthsTasks() {
   monthsTasks = [];
   const week = getWeek();
   const month = getMonth();
-  projects.forEach(project => {
-    const tasks = project.tasks.filter(task => (task.date > week && task.date <= month));
+  projects.forEach(projectObj => {
+    const tasks = projectObj.tasks.filter(task => (task.date > week && task.date <= month));
     tasks.forEach(task => monthsTasks.push(task));
   });
   monthsTasks.sort((a, b) => (a.name > b.name) ? -1 : 1);
@@ -372,8 +371,8 @@ let somedaysTasks = [];
 function getSomedaysTasks() {
   somedaysTasks = [];
   const month = getMonth();
-  projects.forEach(project => {
-    const tasks = project.tasks.filter(task => (task.date > month));
+  projects.forEach(projectObj => {
+    const tasks = projectObj.tasks.filter(task => (task.date > month));
     tasks.forEach(task => somedaysTasks.push(task));
   });
   somedaysTasks.sort((a, b) => (a.name > b.name) ? -1 : 1);
@@ -713,9 +712,9 @@ function deleteTask(e) {
   const striked = e.target.parentNode.nextSibling.innerHTML;
   const taskName = striked.replace(/[\u0336]/g, '');
   const projectName = e.target.parentNode.nextSibling.nextSibling.nextSibling.firstChild.innerHTML;
-  const project = projects.find(project => project.project === projectName);
-  const task = project.tasks.findIndex(task => task.name === taskName);
-  project.tasks.splice(task, 1);
+  const projectObject = projects.find(projectObj => projectObj.project === projectName);
+  const task = projectObject.tasks.findIndex(taskObj => taskObj.name === taskName);
+  projectObject.tasks.splice(task, 1);
   localStorage.setItem('projects', JSON.stringify(projects));
   populateTasks();
 }

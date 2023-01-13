@@ -101,10 +101,6 @@ function openInput() {
 
     addWindowListener();
     input.focus();
-
-    window.setInterval(function() {
-      list.scrollTop = list.scrollHeight;
-    }, 250);
   }
 }
 
