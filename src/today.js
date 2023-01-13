@@ -422,10 +422,10 @@ function populateWeeksTasks() {
       const line = document.createElement('hr');
       line.classList.add('line');
       line.classList.add('task-line');
-      weekContainer.insertBefore(line, weekLine.nextSibling); // agendalist
+      weekContainer.insertBefore(line, weekLine.nextSibling);
       const li = document.createElement('li');
       li.classList.add('task-container');
-      weekContainer.insertBefore(li, weekLine.nextSibling); // agendalist
+      weekContainer.insertBefore(li, weekLine.nextSibling);
       const buttonWrap = document.createElement('span');
       buttonWrap.classList.add('task-button-wrapper');
       li.appendChild(buttonWrap);

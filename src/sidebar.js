@@ -1,7 +1,5 @@
 import populateProjectScreen from "./projects";
-
-const hamburger = document.querySelector('.hamburger');
-hamburger.addEventListener('click', toggleSidebar);
+import { hideForm } from "./taskeditor";
 
 const sidebar = document.querySelector('.sidebar');
 const tasks = document.querySelector('.tasks');
@@ -17,17 +15,28 @@ export default function toggleSidebar() {
   }
 }
 
-const projectsToggle = document.querySelector('.projects-toggle-container');
-projectsToggle.addEventListener('click', toggleButton);
-projectsToggle.addEventListener('click', toggleProjectView);
-const projectBar = document.querySelector('.project-click');
-projectBar.addEventListener('click', toggleButton);
-projectBar.addEventListener('click', toggleProjectView);
-
+const hamburger = document.querySelector('.hamburger');
+hamburger.addEventListener('click', toggleSidebar);
 
 function toggleButton() {
   const arrow = document.querySelector('.projects-toggle');
   arrow.classList.toggle('toggle');
+}
+
+let open = 0;
+
+function closeInputByToggle() {
+  if (open === 0) return;
+  open = 0;
+  const li = document.querySelector('.project-list-item-input');
+  li.remove();
+}
+
+function clearProjectsFromDOM() {
+  const projectListItems = document.querySelectorAll('.project-li');
+  projectListItems.forEach(item => {
+    item.remove();
+  });
 }
 
 let view = 1;
@@ -42,15 +51,26 @@ function toggleProjectView() {
   view = 1;
 }
 
-const addProjectBtn = document.querySelector('.add-project-button-container');
-addProjectBtn.addEventListener('click', openInput);
+const projectsToggle = document.querySelector('.projects-toggle-container');
+projectsToggle.addEventListener('click', toggleButton);
+projectsToggle.addEventListener('click', toggleProjectView);
+const projectBar = document.querySelector('.project-click');
+projectBar.addEventListener('click', toggleButton);
+projectBar.addEventListener('click', toggleProjectView);
 
-let open = 0;
+
+function closeInput(e) {
+  open = 0;
+  e.preventDefault();
+  const li = e.target.parentNode.parentNode
+  li.remove();
+}
+
 const list = document.querySelector('.projects-list');
-
 function openInput() {
-  if (open != 1) {
-    if (view != 1) {
+  hideForm();
+  if (open !== 1) {
+    if (view !== 1) {
       view = 1;
       toggleButton();
       populateProjects();
@@ -81,39 +101,14 @@ function openInput() {
     addWindowListener();
     input.focus();
   }
-  return;
 }
 
-function closeInput(e) {
-  open = 0;
-  e.preventDefault();
-  const li = e.target.parentNode.parentNode
-  li.remove();
-}
-
-function closeInputByToggle() {
-  if (open === 0) return;
-  open = 0;
-  const li = document.querySelector('.project-list-item-input');
-  li.remove();
-}
+const addProjectBtn = document.querySelector('.add-project-button-container');
+addProjectBtn.addEventListener('click', openInput);
 
 export let projects = [];
 if (projects.length === 0 && localStorage.projects) {
   projects = JSON.parse(localStorage.projects);
-}
-
-function addProject(e) {
-  const input = document.querySelector('.project-input');
-
-  if (input === document.activeElement && e.key === 'Enter') {
-    if (checkForDuplicate(input.value) === false) {
-      projects.push(Project(input.value));
-      localStorage.setItem('projects', JSON.stringify(projects));
-      removeWindowListener();
-      populateProjects();
-    }
-  }
 }
 
 function checkForDuplicate(input) {
@@ -129,50 +124,6 @@ function Project(input) {
 
 if (projects.length === 0) {
   projects.push(Project('To Do'));
-}
-
-populateProjects();
-
-function addWindowListener() {
-  window.addEventListener('keydown', addProject);
-}
-
-function removeWindowListener() {
-  window.removeEventListener('keydown', addProject);
-}
-
-export function populateProjects() {
-  clearProjectsFromDOM();
-  projects.forEach(project => {
-    const newList = document.createElement('ul');
-    newList.classList.add('project-innner-list');
-    list.appendChild(newList);
-    const li = document.createElement('li');
-    li.classList.add('sidebar-item');
-    li.classList.add('project-li');
-    newList.appendChild(li);
-    li.addEventListener('click', getProjectByLi);
-    const projectWrapper = document.createElement('div');
-    projectWrapper.classList.add('project-wrapper');
-    li.appendChild(projectWrapper);
-    projectWrapper.addEventListener('click', getProjectByWrapper);
-    const icon = document.createElement('span');
-    icon.innerHTML = '&#128211;'
-    projectWrapper.appendChild(icon);
-    icon.addEventListener('click', getProjectFromIcon);
-    const projectName = document.createElement('span');
-    projectName.classList.add('project-span');
-    projectName.innerHTML = project.project;
-    projectWrapper.appendChild(projectName);
-    projectName.addEventListener('click', getProject);
-  });
-}
-
-function clearProjectsFromDOM() {
-  const projectListItems = document.querySelectorAll('.project-li');
-  projectListItems.forEach(item => {
-    item.remove();
-  });
 }
 
 export let project = 'To Do';
@@ -205,42 +156,64 @@ function getProjectFromIcon(e) {
   populateProjectScreen();
 }
 
-function resizeFn() {
-  if (window.innerWidth <= 880) {
-    closeSidebar();
-    hamburger.removeEventListener('click', toggleSidebar);
-    hamburger.addEventListener('click', toggleSidebarSmallScreen);
-  } else if (window.innerWidth >= 880) {
-    if (isOpen === true) {
-      smokeScreen.style.display = 'none';
-    } else {
-      openSidebar();
-    }
-    hamburger.removeEventListener('click', toggleSidebarSmallScreen);
-    hamburger.addEventListener('click', toggleSidebar);
-  }
-
+export function populateProjects() {
+  clearProjectsFromDOM();
+  projects.forEach(projectObj => {
+    const newList = document.createElement('ul');
+    newList.classList.add('project-innner-list');
+    list.appendChild(newList);
+    const li = document.createElement('li');
+    li.classList.add('sidebar-item');
+    li.classList.add('project-li');
+    newList.appendChild(li);
+    li.addEventListener('click', getProjectByLi);
+    const projectWrapper = document.createElement('div');
+    projectWrapper.classList.add('project-wrapper');
+    li.appendChild(projectWrapper);
+    projectWrapper.addEventListener('click', getProjectByWrapper);
+    const icon = document.createElement('span');
+    icon.innerHTML = '&#128211;'
+    projectWrapper.appendChild(icon);
+    icon.addEventListener('click', getProjectFromIcon);
+    const projectName = document.createElement('span');
+    projectName.classList.add('project-span');
+    projectName.innerHTML = projectObj.project;
+    projectWrapper.appendChild(projectName);
+    projectName.addEventListener('click', getProject);
+  });
 }
 
-function closeSidebar() {
+populateProjects();
+
+function addProject(e) {
+  const input = document.querySelector('.project-input');
+  if (input === document.activeElement && e.key === 'Enter') {
+    if (checkForDuplicate(input.value) === false) {
+      projects.push(Project(input.value));
+      localStorage.setItem('projects', JSON.stringify(projects));
+      removeWindowListener();
+      populateProjects();
+    }
+  }
+}
+
+function addWindowListener() {
+  window.addEventListener('keydown', addProject);
+}
+
+function removeWindowListener() {
+  window.removeEventListener('keydown', addProject);
+}
+
+const smokeScreen = document.querySelector('.smoke-screen');
+
+export function closeSidebar() {
   if (!sidebar.classList.contains('invisible')) {
     sidebar.classList.add('invisible');
     isOpen = false;
     tasks.classList.remove('stretch');
   }
 }
-
-function openSidebar() {
-  if (sidebar.classList.contains('invisible')) {
-    sidebar.classList.remove('invisible');
-    isOpen = true;
-    tasks.classList.add('stretch');
-  }
-}
-
-window.onresize = resizeFn;
-
-const smokeScreen = document.querySelector('.smoke-screen');
 
 export function toggleSidebarSmallScreen() {
   sidebar.classList.toggle('invisible');
@@ -251,6 +224,16 @@ export function toggleSidebarSmallScreen() {
     isOpen = true;
   }
   toggleSmoke();
+  closeInputByToggle();
+  hideForm();
+}
+
+function openSidebar() {
+  if (sidebar.classList.contains('invisible')) {
+    sidebar.classList.remove('invisible');
+    isOpen = true;
+    tasks.classList.add('stretch');
+  }
 }
 
 function toggleSmoke() {
@@ -263,4 +246,31 @@ function toggleSmoke() {
   }
 }
 
+
+function resizeFn() {
+  if (window.innerWidth <= 880) {
+    hamburger.removeEventListener('click', toggleSidebar);
+    hamburger.addEventListener('click', toggleSidebarSmallScreen);
+  }
+  const isMobile = navigator.userAgentData.mobile;
+  if (isMobile) {
+    hamburger.removeEventListener('click', toggleSidebar);
+    hamburger.addEventListener('click', toggleSidebarSmallScreen);
+    tasks.classList.remove('stretch');
+    return;
+  }
+  if (window.innerWidth <= 880) {
+    closeSidebar();
+  } else if (window.innerWidth >= 880) {
+    if (isOpen === true) {
+      smokeScreen.style.display = 'none';
+    } else {
+      openSidebar();
+    }
+    hamburger.removeEventListener('click', toggleSidebarSmallScreen);
+    hamburger.addEventListener('click', toggleSidebar);
+  }
+}
+
 window.onload = resizeFn;
+window.onresize = resizeFn;

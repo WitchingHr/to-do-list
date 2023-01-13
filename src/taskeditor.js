@@ -1,4 +1,4 @@
-import { projects } from './sidebar';
+import { closeSidebar, projects } from './sidebar';
 import { populateTasks } from './today';
 
 addAddTaskListener();
@@ -6,7 +6,18 @@ addAddTaskListener();
 const heading = document.querySelector('.agenda-heading');
 const list = document.querySelector('.agenda-list');
 
+function closeSmoke() {
+  const smoke = document.querySelector('.smoke-screen');
+  if (smoke.style.display === 'block') {
+    smoke.style.display = 'none';
+  }
+}
+
 export default function openTaskAdder() {
+  if (window.innerWidth <= 880) {
+    closeSidebar();
+  }
+  closeSmoke();
   hideButton();
   createForm();
   addEnterListener();
@@ -122,9 +133,11 @@ function createForm() {
 
 export function hideForm() {
   const form = document.querySelector('.li-form');
-  form.remove();
-  window.removeEventListener('keydown', submitTaskByEnter);
-  showButton();
+  if (form) {
+    form.remove();
+    window.removeEventListener('keydown', submitTaskByEnter);
+    showButton();
+  }
 }
 
 function showButton() {
@@ -146,7 +159,13 @@ function hideButton() {
 function getCoordinates() {
   const projectBtn = document.querySelector('.project-info');
   const rect = projectBtn.getBoundingClientRect();
-  const x = rect.left;
+  let x;
+  const width = projectBtn.offsetWidth;
+  if (window.innerWidth <= 480) {
+    x = rect.left + width - 200;
+  } else {
+    x = rect.left;
+  }
   const y = rect.bottom;
   return [x, y];
 }
