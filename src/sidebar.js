@@ -80,7 +80,7 @@ function openInput() {
 
     const li = document.createElement('li');
     li.classList.add('project-list-item-input');
-    list.appendChild(li);
+    list.insertBefore(li, list.firstChild);
 
     const form = document.createElement('form');
     form.classList.add('project-form');
