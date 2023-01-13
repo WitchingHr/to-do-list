@@ -129,9 +129,11 @@ function createForm() {
   addTask.addEventListener('click', submitTask);
 
   taskNameInput.focus();
-  window.setInterval(function() {
+  const scrollInterval = setInterval(() => {
     list.scrollTop = list.scrollHeight;
+    clearInterval(scrollInterval);
   }, 250);
+
 }
 
 export function hideForm() {
