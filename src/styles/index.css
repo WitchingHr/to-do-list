@@ -35,7 +35,8 @@ body {
   box-shadow: 0px 2px 3px 0px #80808063;
   color: gray;
   width: 200px;
-  overflow: hidden;
+  overflow: scroll;
+  height: 100px;
 }
 
 .modal-list {
@@ -485,6 +486,7 @@ input[type='date'] {
   justify-content: flex-end;
   gap: 8px;
   margin-top: 8px;
+  margin-bottom: 100px;
 }
 
 .save-bar-buttons {
