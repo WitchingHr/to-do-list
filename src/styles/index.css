@@ -10,7 +10,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   color: var(--font-color-dark);
   background-color: #0c1319;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .content {
@@ -169,6 +169,7 @@ body {
   display: flex;
   align-items: center;
 }
+
 .home {
   background: none;
   background-image: url(../icons/dark-mode/home.svg);
