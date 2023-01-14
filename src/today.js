@@ -703,7 +703,12 @@ function completeTask(e) {
   const projectName = e.target.parentNode.nextSibling.nextSibling.nextSibling.firstChild.innerHTML;
   const project = projects.find(project => project.project === projectName);
   const task = project.tasks.find(task => task.name === taskName);
-  task.complete === 0 ? task.complete = 1 : task.complete = 0;
+  if (task.complete === 0) {
+    task.complete = 1;
+    navigator.vibrate(50);
+  } else {
+    task.complete = 0;
+  }
   localStorage.setItem('projects', JSON.stringify(projects));
   populateTasks();
 }
@@ -716,6 +721,7 @@ function deleteTask(e) {
   const task = projectObject.tasks.findIndex(taskObj => taskObj.name === taskName);
   projectObject.tasks.splice(task, 1);
   localStorage.setItem('projects', JSON.stringify(projects));
+  navigator.vibrate(50);
   populateTasks();
 }
 

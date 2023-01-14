@@ -101,6 +101,7 @@ function closeModalByClick(e) {
 function deleteProject() {
   const index = projects.findIndex(obj => obj.project === project);
   projects.splice(index, 1);
+  navigator.vibrate(50);
   localStorage.setItem('projects', JSON.stringify(projects));
   closeModal();
   initializeProject();

@@ -207,6 +207,7 @@ function addProject(e) {
       projects.push(Project(input.value));
       localStorage.setItem('projects', JSON.stringify(projects));
       removeWindowListener();
+      navigator.vibrate(50);
       populateProjects();
     }
   }

@@ -250,6 +250,7 @@ function submitTask(e) {
     projects[index].tasks.reverse().push(Task(name, description, project, date, complete));
     localStorage.setItem('projects', JSON.stringify(projects));
     hideForm();
+    navigator.vibrate(50);
     populateTasks();
   }
 }
