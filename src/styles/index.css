@@ -141,6 +141,8 @@ body {
   justify-content: space-between;
   background-color: #3f3f3f;
   padding: 10px 20px;
+  box-shadow: -4px 0 10px 0 black;
+  z-index: 3;
 }
 
 .header-left {
