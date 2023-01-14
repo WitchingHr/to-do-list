@@ -146,11 +146,13 @@ body {
 .header-left {
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 
 .header-right {
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 
 .hamburger {
@@ -163,6 +165,10 @@ body {
   border: none;
 }
 
+.home-form {
+  display: flex;
+  align-items: center;
+}
 .home {
   background: none;
   background-image: url(../icons/dark-mode/home.svg);
@@ -850,9 +856,10 @@ li.complete {
   }
 }
 
-@-moz-document url-prefix() {
+@-moz-document url-prefix() and (min-width: 481px){
   .home {
     position: relative;
-    bottom: 3px;
+    /* bottom: 4px; */
+    bottom: 9px;
   }
 }
