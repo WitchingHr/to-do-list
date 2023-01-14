@@ -672,6 +672,10 @@ li.complete {
   .task-desc {
     display: none;
   }
+  
+  .editor-input-bottom {
+    display: none;
+  }
 
   .agenda-container {
     width: 90%;
@@ -724,7 +728,6 @@ li.complete {
 
   .sidebar,
   .editor-input-top,
-  .editor-input-bottom,
   .calendar,
   .project-info,
   .project-input,
@@ -791,8 +794,7 @@ li.complete {
     background-color: lightblue;
   }
 
-  .editor-input-top,
-  .editor-input-bottom {
+  .editor-input-top {
     height: 50px;
   }
 
@@ -845,5 +847,12 @@ li.complete {
 @media only screen and (max-width: 450px) {
   .task-project {
     display: none;
+  }
+}
+
+@-moz-document url-prefix() {
+  .home {
+    position: relative;
+    bottom: 3px;
   }
 }
