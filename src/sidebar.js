@@ -235,8 +235,10 @@ export function toggleSidebarSmallScreen() {
   tasks.classList.remove('stretch');
   if (sidebar.classList.contains('invisible')) {
     isOpen = false;
+    document.body.style.overflow = 'auto';
   } else {
     isOpen = true;
+    document.body.style.overflow = 'hidden';
   }
   toggleSmoke();
   closeInputByToggle();
