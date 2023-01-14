@@ -8,7 +8,6 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  overflow: hidden;
   color: var(--font-color-dark);
   background-color: #0c1319;
 }
@@ -393,7 +392,7 @@ h1 {
   overflow: scroll;
   overflow-y: auto;
   overflow-x: auto;
-  height: 75vh;
+  max-height: 75vh;
 }
 
 button.agenda-add-task {
@@ -761,12 +760,15 @@ li.complete {
   }
 
   h2,
-  .agenda-add-task,
   .header-date,
   .delete-project,
   .info,
   .delete-btn {
     font-size: 20px;
+  }
+
+  .agenda-add-task {
+    display: none;
   }
 
   .task-container {

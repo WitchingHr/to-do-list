@@ -349,7 +349,7 @@ function getWeeksTasks() {
     tasks.forEach(task => weeksTasks.push(task));
   });
   weeksTasks.sort((a, b) => (a.name > b.name) ? -1 : 1);
-  weeksTasks.sort((a, b) => (a.date > b.date) ? -1 : 1);
+  weeksTasks.sort((a, b) => (a.date > b.date) ? 1 : -1);
   weeksTasks.sort((a, b) => (a.complete > b.complete) ? -1 : 1);
 }
 
@@ -363,7 +363,7 @@ function getMonthsTasks() {
     tasks.forEach(task => monthsTasks.push(task));
   });
   monthsTasks.sort((a, b) => (a.name > b.name) ? -1 : 1);
-  monthsTasks.sort((a, b) => (a.date > b.date) ? -1 : 1);
+  monthsTasks.sort((a, b) => (a.date > b.date) ? 1 : -1);
   monthsTasks.sort((a, b) => (a.complete > b.complete) ? -1 : 1);
 }
 
@@ -376,7 +376,7 @@ function getSomedaysTasks() {
     tasks.forEach(task => somedaysTasks.push(task));
   });
   somedaysTasks.sort((a, b) => (a.name > b.name) ? -1 : 1);
-  somedaysTasks.sort((a, b) => (a.date > b.date) ? -1 : 1);
+  somedaysTasks.sort((a, b) => (a.date > b.date) ? 1 : -1);
   somedaysTasks.sort((a, b) => (a.complete > b.complete) ? -1 : 1);
 }
 
