@@ -1,5 +1,10 @@
 # To Do List
-
+<img width="1470" alt="Screenshot 2023-01-26 at 1 52 45 PM" src="https://user-images.githubusercontent.com/41353202/214924739-25813257-dbb7-42f1-a315-98bbcb49a688.png">
+<img width="1470" alt="Screenshot 2023-01-26 at 1 53 08 PM" src="https://user-images.githubusercontent.com/41353202/214924756-25673ee1-d819-4a57-9ba7-3277b3fb51a9.png">
+<p align="middle">
+<img width="389" alt="Screenshot 2023-01-26 at 1 54 12 PM" src="https://user-images.githubusercontent.com/41353202/214924901-0362b33f-a349-4973-92d2-cf86afd0c488.png">
+<img width="389" alt="Screenshot 2023-01-26 at 1 53 39 PM" src="https://user-images.githubusercontent.com/41353202/214924915-c1a017cc-a19a-4aa7-91ca-c9799435cab4.png">
+</p>
 
 ## Abstract
 To Do List created for The Odin Project curriculum. 
