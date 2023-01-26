@@ -15,6 +15,8 @@ Built with Webpack, there a multiple modules for specific functions and call upo
 
 Another challenge I faced with building this app was getting the sidebar to function differently when in different layouts. I used an *onresize* function to get the sidebar to automatically close if the user resizes the window past the mobile layout threshold of 768px. Additionally, the listener attached to the sidebar button is changed to a different function that changes how the sidebar opens in a mobile layout. The difficulty with this process was getting the browser to know which layout it was in on page load. To accomplish this I set the same function as the *onresize* to the *onreload* event and added a mobile checker function inside that checks for device name. Big thanks to [Detect Mobile Browsers](http://detectmobilebrowsers.com/).
 
+The task editor form includes a modal that shows project names for selecting to submit your task to. The challenge with this was figuring out how to position the modal directly beneath the button that opens it. I ended up learning and using *.getBoundingClient* and writing a function that uses the coordinates to determine where the modal will be positioned.
+
 I had a lot of fun with designing the data structure for the projects and tasks. And learned some new ways to retrieve and sort the objects that matched a name or date, especially the *filter method*. 
 
 I also learned how tedious it is working with Date and customizing the way you want dates to be shown, as well as dealing with timezone offsets. Now I know why we use libraries for this sort of thing.
@@ -26,6 +28,7 @@ Finally, this was also the first time that I got to utilize the localStorage int
  - Why we need to loosely-couple our code!
  - Creating organized data structures
  - Retrieving and sorting data
+ - Getting element coordinates and using them to position new elements
  - Manipulating dates and building functions to format them
  - Saving to the browser with localStorage
  - Window.onload & Window.onresize
